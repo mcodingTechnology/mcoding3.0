@@ -1,0 +1,322 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.els.base.company.dao.UserColumnDefinedMapper" >
+  <resultMap id="BaseResultMap" type="com.els.base.company.entity.UserColumnDefined" >
+    <id column="ID" property="id" jdbcType="VARCHAR" />
+    <result column="PROJECT_ID" property="projectId" jdbcType="VARCHAR" />
+    <result column="MODEL_CODE" property="modelCode" jdbcType="VARCHAR" />
+    <result column="USER_ID" property="userId" jdbcType="VARCHAR" />
+    <result column="IS_DEFALUT" property="isDefalut" jdbcType="INTEGER" />
+    <result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.els.base.company.entity.UserColumnDefined" extends="BaseResultMap" >
+    <result column="COLUMN_DEFINED_VALUE" property="columnDefinedValue" jdbcType="LONGVARCHAR" />
+    <result column="COLUMN_VALUE" property="columnValue" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ID, PROJECT_ID, MODEL_CODE, USER_ID, IS_DEFALUT, CREATE_TIME
+  </sql>
+  <sql id="Blob_Column_List" >
+    COLUMN_DEFINED_VALUE, COLUMN_VALUE
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.els.base.company.entity.UserColumnDefinedExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from T_BASE_USER_COLUMN_DEFINED
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.els.base.company.entity.UserColumnDefinedExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from T_BASE_USER_COLUMN_DEFINED
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from T_BASE_USER_COLUMN_DEFINED
+    where ID = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from T_BASE_USER_COLUMN_DEFINED
+    where ID = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.els.base.company.entity.UserColumnDefinedExample" >
+    delete from T_BASE_USER_COLUMN_DEFINED
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.els.base.company.entity.UserColumnDefined" >
+    <bind name="_uuid" value="@com.els.base.utils.uuid.UUIDGenerator@generateUUIDAndSetId(#this)"/>
+    insert into T_BASE_USER_COLUMN_DEFINED (ID, PROJECT_ID, MODEL_CODE, USER_ID, 
+      IS_DEFALUT, CREATE_TIME, COLUMN_DEFINED_VALUE, 
+      COLUMN_VALUE)
+    values (#{_uuid}, #{projectId,jdbcType=VARCHAR}, #{modelCode,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, 
+      #{isDefalut,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{columnDefinedValue,jdbcType=LONGVARCHAR}, 
+      #{columnValue,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.els.base.company.entity.UserColumnDefined" >
+    <bind name="_uuid" value="@com.els.base.utils.uuid.UUIDGenerator@generateUUIDAndSetId(#this)"/>
+    insert into T_BASE_USER_COLUMN_DEFINED
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      ID,
+      <if test="projectId != null" >
+        PROJECT_ID,
+      </if>
+      <if test="modelCode != null" >
+        MODEL_CODE,
+      </if>
+      <if test="userId != null" >
+        USER_ID,
+      </if>
+      <if test="isDefalut != null" >
+        IS_DEFALUT,
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME,
+      </if>
+      <if test="columnDefinedValue != null" >
+        COLUMN_DEFINED_VALUE,
+      </if>
+      <if test="columnValue != null" >
+        COLUMN_VALUE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      #{_uuid},
+      <if test="projectId != null" >
+        #{projectId,jdbcType=VARCHAR},
+      </if>
+      <if test="modelCode != null" >
+        #{modelCode,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="isDefalut != null" >
+        #{isDefalut,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="columnDefinedValue != null" >
+        #{columnDefinedValue,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="columnValue != null" >
+        #{columnValue,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.els.base.company.entity.UserColumnDefinedExample" resultType="java.lang.Integer" >
+    select count(*) from T_BASE_USER_COLUMN_DEFINED
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update T_BASE_USER_COLUMN_DEFINED
+    <set >
+      <if test="record.id != null" >
+        ID = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.projectId != null" >
+        PROJECT_ID = #{record.projectId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.modelCode != null" >
+        MODEL_CODE = #{record.modelCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userId != null" >
+        USER_ID = #{record.userId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isDefalut != null" >
+        IS_DEFALUT = #{record.isDefalut,jdbcType=INTEGER},
+      </if>
+      <if test="record.createTime != null" >
+        CREATE_TIME = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.columnDefinedValue != null" >
+        COLUMN_DEFINED_VALUE = #{record.columnDefinedValue,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.columnValue != null" >
+        COLUMN_VALUE = #{record.columnValue,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update T_BASE_USER_COLUMN_DEFINED
+    set ID = #{record.id,jdbcType=VARCHAR},
+      PROJECT_ID = #{record.projectId,jdbcType=VARCHAR},
+      MODEL_CODE = #{record.modelCode,jdbcType=VARCHAR},
+      USER_ID = #{record.userId,jdbcType=VARCHAR},
+      IS_DEFALUT = #{record.isDefalut,jdbcType=INTEGER},
+      CREATE_TIME = #{record.createTime,jdbcType=TIMESTAMP},
+      COLUMN_DEFINED_VALUE = #{record.columnDefinedValue,jdbcType=LONGVARCHAR},
+      COLUMN_VALUE = #{record.columnValue,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update T_BASE_USER_COLUMN_DEFINED
+    set ID = #{record.id,jdbcType=VARCHAR},
+      PROJECT_ID = #{record.projectId,jdbcType=VARCHAR},
+      MODEL_CODE = #{record.modelCode,jdbcType=VARCHAR},
+      USER_ID = #{record.userId,jdbcType=VARCHAR},
+      IS_DEFALUT = #{record.isDefalut,jdbcType=INTEGER},
+      CREATE_TIME = #{record.createTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.els.base.company.entity.UserColumnDefined" >
+    update T_BASE_USER_COLUMN_DEFINED
+    <set >
+      <if test="projectId != null" >
+        PROJECT_ID = #{projectId,jdbcType=VARCHAR},
+      </if>
+      <if test="modelCode != null" >
+        MODEL_CODE = #{modelCode,jdbcType=VARCHAR},
+      </if>
+      <if test="isDefalut != null" >
+        IS_DEFALUT = #{isDefalut,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="columnDefinedValue != null" >
+        COLUMN_DEFINED_VALUE = #{columnDefinedValue,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="columnValue != null" >
+        COLUMN_VALUE = #{columnValue,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=VARCHAR} and USER_ID = #{userId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.els.base.company.entity.UserColumnDefined" >
+    update T_BASE_USER_COLUMN_DEFINED
+    set PROJECT_ID = #{projectId,jdbcType=VARCHAR},
+      MODEL_CODE = #{modelCode,jdbcType=VARCHAR},
+      USER_ID = #{userId,jdbcType=VARCHAR},
+      IS_DEFALUT = #{isDefalut,jdbcType=INTEGER},
+      CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      COLUMN_DEFINED_VALUE = #{columnDefinedValue,jdbcType=LONGVARCHAR},
+      COLUMN_VALUE = #{columnValue,jdbcType=LONGVARCHAR}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.els.base.company.entity.UserColumnDefined" >
+    update T_BASE_USER_COLUMN_DEFINED
+    set PROJECT_ID = #{projectId,jdbcType=VARCHAR},
+      MODEL_CODE = #{modelCode,jdbcType=VARCHAR},
+      USER_ID = #{userId,jdbcType=VARCHAR},
+      IS_DEFALUT = #{isDefalut,jdbcType=INTEGER},
+      CREATE_TIME = #{createTime,jdbcType=TIMESTAMP}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <select id="selectByExampleByPage" resultMap="BaseResultMap" parameterType="com.els.base.company.entity.UserColumnDefinedExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from T_BASE_USER_COLUMN_DEFINED
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+   <select id="selectByUserModelCode" resultMap="ResultMapWithBLOBs" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from T_BASE_USER_COLUMN_DEFINED
+    where USER_ID = #{userId,jdbcType=VARCHAR} AND MODEL_CODE = #{modelCode,jdbcType=VARCHAR}
+  </select>
+</mapper>

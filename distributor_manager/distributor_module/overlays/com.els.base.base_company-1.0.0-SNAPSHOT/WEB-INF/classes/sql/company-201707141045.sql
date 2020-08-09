@@ -1,0 +1,1 @@
+alter table T_BASE_COMPANY_ADDRESS add column DEFAULT_ADDRESS NUMBER(10,0);

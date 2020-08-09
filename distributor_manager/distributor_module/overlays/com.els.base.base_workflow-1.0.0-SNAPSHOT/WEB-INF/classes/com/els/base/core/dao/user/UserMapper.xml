@@ -1,0 +1,452 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.els.base.core.dao.user.UserMapper" >
+  <resultMap id="BaseResultMap" type="com.els.base.core.entity.user.User" >
+    <id column="ID" property="id" jdbcType="VARCHAR" />
+    <result column="LOGIN_NAME" property="loginName" jdbcType="VARCHAR" />
+    <result column="NICK_NAME" property="nickName" jdbcType="VARCHAR" />
+    <result column="PASSWORD" property="password" jdbcType="VARCHAR" />
+    <result column="PASSWORD_KEY" property="passwordKey" jdbcType="VARCHAR" />
+    <result column="PROJECT_CODE" property="projectCode" jdbcType="VARCHAR" />
+    <result column="GENDER" property="gender" jdbcType="VARCHAR" />
+    <result column="EMAIL" property="email" jdbcType="VARCHAR" />
+    <result column="MOBILE_PHONE" property="mobilePhone" jdbcType="VARCHAR" />
+    <result column="WORK_NUM" property="workNum" jdbcType="VARCHAR" />
+    <result column="WECHAT" property="wechat" jdbcType="VARCHAR" />
+    <result column="QQ" property="qq" jdbcType="VARCHAR" />
+    <result column="FAX" property="fax" jdbcType="VARCHAR" />
+    <result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="UPDATE_TIME" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="IS_ENABLE" property="isEnable" jdbcType="INTEGER" />
+    <result column="LAST_LOGIN_TIME" property="lastLoginTime" jdbcType="TIMESTAMP" />
+    <result column="EXPIRE_TIME" property="expireTime" jdbcType="TIMESTAMP" />
+    <result column="USER_IMG" property="userImg" jdbcType="VARCHAR" />
+    <result column="USER_AREA" property="userArea" jdbcType="VARCHAR" />
+    <result column="ID" property="extInfo" jdbcType="VARCHAR"  typeHandler="com.els.base.core.dao.user.handler.UserExtInfoTypeHandler"  />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ID, LOGIN_NAME, NICK_NAME, PASSWORD, PASSWORD_KEY, PROJECT_CODE, GENDER, EMAIL, MOBILE_PHONE, 
+    WORK_NUM, WECHAT, QQ, FAX, CREATE_TIME, UPDATE_TIME, IS_ENABLE, LAST_LOGIN_TIME, 
+    EXPIRE_TIME, USER_IMG,USER_AREA
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.els.base.core.entity.user.UserExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from T_BASE_USER
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from T_BASE_USER
+    where ID = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from T_BASE_USER
+    where ID = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.els.base.core.entity.user.UserExample" >
+    delete from T_BASE_USER
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.els.base.core.entity.user.User" >
+    <bind name="_uuid" value="@com.els.base.utils.uuid.UUIDGenerator@generateUUIDAndSetId(#this)"/>
+    insert into T_BASE_USER (ID, LOGIN_NAME, NICK_NAME, 
+      PASSWORD, PASSWORD_KEY, PROJECT_CODE, 
+      GENDER, EMAIL, MOBILE_PHONE, 
+      WORK_NUM, WECHAT, QQ, 
+      FAX, CREATE_TIME, UPDATE_TIME, 
+      IS_ENABLE, LAST_LOGIN_TIME, EXPIRE_TIME, 
+      USER_IMG)
+    values (#{_uuid}, #{loginName,jdbcType=VARCHAR}, #{nickName,jdbcType=VARCHAR}, 
+      #{password,jdbcType=VARCHAR}, #{passwordKey,jdbcType=VARCHAR}, #{projectCode,jdbcType=VARCHAR}, 
+      #{gender,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{mobilePhone,jdbcType=VARCHAR}, 
+      #{workNum,jdbcType=VARCHAR}, #{wechat,jdbcType=VARCHAR}, #{qq,jdbcType=VARCHAR}, 
+      #{fax,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, 
+      #{isEnable,jdbcType=INTEGER}, #{lastLoginTime,jdbcType=TIMESTAMP}, #{expireTime,jdbcType=TIMESTAMP}, 
+      #{userImg,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.els.base.core.entity.user.User" >
+    <bind name="_uuid" value="@com.els.base.utils.uuid.UUIDGenerator@generateUUIDAndSetId(#this)"/>
+    insert into T_BASE_USER
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+        ID,
+      <if test="loginName != null" >
+        LOGIN_NAME,
+      </if>
+      <if test="nickName != null" >
+        NICK_NAME,
+      </if>
+      <if test="password != null" >
+        PASSWORD,
+      </if>
+      <if test="passwordKey != null" >
+        PASSWORD_KEY,
+      </if>
+      <if test="projectCode != null" >
+        PROJECT_CODE,
+      </if>
+      <if test="gender != null" >
+        GENDER,
+      </if>
+      <if test="email != null" >
+        EMAIL,
+      </if>
+      <if test="mobilePhone != null" >
+        MOBILE_PHONE,
+      </if>
+      <if test="workNum != null" >
+        WORK_NUM,
+      </if>
+      <if test="wechat != null" >
+        WECHAT,
+      </if>
+      <if test="qq != null" >
+        QQ,
+      </if>
+      <if test="fax != null" >
+        FAX,
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME,
+      </if>
+      <if test="updateTime != null" >
+        UPDATE_TIME,
+      </if>
+      <if test="isEnable != null" >
+        IS_ENABLE,
+      </if>
+      <if test="lastLoginTime != null" >
+        LAST_LOGIN_TIME,
+      </if>
+      <if test="expireTime != null" >
+        EXPIRE_TIME,
+      </if>
+      <if test="userImg != null" >
+        USER_IMG,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      #{_uuid},
+      <if test="loginName != null" >
+        #{loginName,jdbcType=VARCHAR},
+      </if>
+      <if test="nickName != null" >
+        #{nickName,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="passwordKey != null" >
+        #{passwordKey,jdbcType=VARCHAR},
+      </if>
+      <if test="projectCode != null" >
+        #{projectCode,jdbcType=VARCHAR},
+      </if>
+      <if test="gender != null" >
+        #{gender,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="mobilePhone != null" >
+        #{mobilePhone,jdbcType=VARCHAR},
+      </if>
+      <if test="workNum != null" >
+        #{workNum,jdbcType=VARCHAR},
+      </if>
+      <if test="wechat != null" >
+        #{wechat,jdbcType=VARCHAR},
+      </if>
+      <if test="qq != null" >
+        #{qq,jdbcType=VARCHAR},
+      </if>
+      <if test="fax != null" >
+        #{fax,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isEnable != null" >
+        #{isEnable,jdbcType=INTEGER},
+      </if>
+      <if test="lastLoginTime != null" >
+        #{lastLoginTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="expireTime != null" >
+        #{expireTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userImg != null" >
+        #{userImg,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.els.base.core.entity.user.UserExample" resultType="java.lang.Integer" >
+    select count(*) from T_BASE_USER
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update T_BASE_USER
+    <set >
+      <if test="record.id != null" >
+        ID = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.loginName != null" >
+        LOGIN_NAME = #{record.loginName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.nickName != null" >
+        NICK_NAME = #{record.nickName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.password != null" >
+        PASSWORD = #{record.password,jdbcType=VARCHAR},
+      </if>
+      <if test="record.passwordKey != null" >
+        PASSWORD_KEY = #{record.passwordKey,jdbcType=VARCHAR},
+      </if>
+      <if test="record.projectCode != null" >
+        PROJECT_CODE = #{record.projectCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.gender != null" >
+        GENDER = #{record.gender,jdbcType=VARCHAR},
+      </if>
+      <if test="record.email != null" >
+        EMAIL = #{record.email,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mobilePhone != null" >
+        MOBILE_PHONE = #{record.mobilePhone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.workNum != null" >
+        WORK_NUM = #{record.workNum,jdbcType=VARCHAR},
+      </if>
+      <if test="record.wechat != null" >
+        WECHAT = #{record.wechat,jdbcType=VARCHAR},
+      </if>
+      <if test="record.qq != null" >
+        QQ = #{record.qq,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fax != null" >
+        FAX = #{record.fax,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null" >
+        CREATE_TIME = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateTime != null" >
+        UPDATE_TIME = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.isEnable != null" >
+        IS_ENABLE = #{record.isEnable,jdbcType=INTEGER},
+      </if>
+      <if test="record.lastLoginTime != null" >
+        LAST_LOGIN_TIME = #{record.lastLoginTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.expireTime != null" >
+        EXPIRE_TIME = #{record.expireTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.userImg != null" >
+        USER_IMG = #{record.userImg,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update T_BASE_USER
+    set ID = #{record.id,jdbcType=VARCHAR},
+      LOGIN_NAME = #{record.loginName,jdbcType=VARCHAR},
+      NICK_NAME = #{record.nickName,jdbcType=VARCHAR},
+      PASSWORD = #{record.password,jdbcType=VARCHAR},
+      PASSWORD_KEY = #{record.passwordKey,jdbcType=VARCHAR},
+      PROJECT_CODE = #{record.projectCode,jdbcType=VARCHAR},
+      GENDER = #{record.gender,jdbcType=VARCHAR},
+      EMAIL = #{record.email,jdbcType=VARCHAR},
+      MOBILE_PHONE = #{record.mobilePhone,jdbcType=VARCHAR},
+      WORK_NUM = #{record.workNum,jdbcType=VARCHAR},
+      WECHAT = #{record.wechat,jdbcType=VARCHAR},
+      QQ = #{record.qq,jdbcType=VARCHAR},
+      FAX = #{record.fax,jdbcType=VARCHAR},
+      CREATE_TIME = #{record.createTime,jdbcType=TIMESTAMP},
+      UPDATE_TIME = #{record.updateTime,jdbcType=TIMESTAMP},
+      IS_ENABLE = #{record.isEnable,jdbcType=INTEGER},
+      LAST_LOGIN_TIME = #{record.lastLoginTime,jdbcType=TIMESTAMP},
+      EXPIRE_TIME = #{record.expireTime,jdbcType=TIMESTAMP},
+      USER_IMG = #{record.userImg,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.els.base.core.entity.user.User" >
+    update T_BASE_USER
+    <set >
+      <if test="loginName != null" >
+        LOGIN_NAME = #{loginName,jdbcType=VARCHAR},
+      </if>
+      <if test="nickName != null" >
+        NICK_NAME = #{nickName,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        PASSWORD = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="passwordKey != null" >
+        PASSWORD_KEY = #{passwordKey,jdbcType=VARCHAR},
+      </if>
+      <if test="projectCode != null" >
+        PROJECT_CODE = #{projectCode,jdbcType=VARCHAR},
+      </if>
+      <if test="gender != null" >
+        GENDER = #{gender,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        EMAIL = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="mobilePhone != null" >
+        MOBILE_PHONE = #{mobilePhone,jdbcType=VARCHAR},
+      </if>
+      <if test="workNum != null" >
+        WORK_NUM = #{workNum,jdbcType=VARCHAR},
+      </if>
+      <if test="wechat != null" >
+        WECHAT = #{wechat,jdbcType=VARCHAR},
+      </if>
+      <if test="qq != null" >
+        QQ = #{qq,jdbcType=VARCHAR},
+      </if>
+      <if test="fax != null" >
+        FAX = #{fax,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isEnable != null" >
+        IS_ENABLE = #{isEnable,jdbcType=INTEGER},
+      </if>
+      <if test="lastLoginTime != null" >
+        LAST_LOGIN_TIME = #{lastLoginTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="expireTime != null" >
+        EXPIRE_TIME = #{expireTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userImg != null" >
+        USER_IMG = #{userImg,jdbcType=VARCHAR},
+      </if>
+      <if test="userArea != null" >
+        USER_AREA = #{userArea,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.els.base.core.entity.user.User" >
+    update T_BASE_USER
+    set LOGIN_NAME = #{loginName,jdbcType=VARCHAR},
+      NICK_NAME = #{nickName,jdbcType=VARCHAR},
+      PASSWORD = #{password,jdbcType=VARCHAR},
+      PASSWORD_KEY = #{passwordKey,jdbcType=VARCHAR},
+      PROJECT_CODE = #{projectCode,jdbcType=VARCHAR},
+      GENDER = #{gender,jdbcType=VARCHAR},
+      EMAIL = #{email,jdbcType=VARCHAR},
+      MOBILE_PHONE = #{mobilePhone,jdbcType=VARCHAR},
+      WORK_NUM = #{workNum,jdbcType=VARCHAR},
+      WECHAT = #{wechat,jdbcType=VARCHAR},
+      QQ = #{qq,jdbcType=VARCHAR},
+      FAX = #{fax,jdbcType=VARCHAR},
+      CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+      IS_ENABLE = #{isEnable,jdbcType=INTEGER},
+      LAST_LOGIN_TIME = #{lastLoginTime,jdbcType=TIMESTAMP},
+      EXPIRE_TIME = #{expireTime,jdbcType=TIMESTAMP},
+      USER_IMG = #{userImg,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <select id="selectByExampleByPage" resultMap="BaseResultMap" parameterType="com.els.base.core.entity.user.UserExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from T_BASE_USER
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+</mapper>

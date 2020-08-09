@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:activiti="http://activiti.org/bpmn" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" typeLanguage="http://www.w3.org/2001/XMLSchema" expressionLanguage="http://www.w3.org/1999/XPath" targetNamespace="http://www.activiti.org/test">
+  <process id="myProcess" name="My process" isExecutable="true">
+    <startEvent id="start_after_order_created" name="Start_After_Order_Created"></startEvent>
+    <userTask id="purchaser_send_order_to_supplier" name="purchaser_send_order_to_supplier"></userTask>
+    <sequenceFlow id="flow1" sourceRef="start_after_order_created" targetRef="purchaser_send_order_to_supplier"></sequenceFlow>
+    <userTask id="supplier_receive_and_reply" name="supplier_receive_and_reply"></userTask>
+    <sequenceFlow id="flow2" sourceRef="purchaser_send_order_to_supplier" targetRef="supplier_receive_and_reply"></sequenceFlow>
+    <endEvent id="endevent1" name="End"></endEvent>
+    <sequenceFlow id="flow3" sourceRef="supplier_receive_and_reply" targetRef="endevent1"></sequenceFlow>
+  </process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_myProcess">
+    <bpmndi:BPMNPlane bpmnElement="myProcess" id="BPMNPlane_myProcess">
+      <bpmndi:BPMNShape bpmnElement="start_after_order_created" id="BPMNShape_start_after_order_created">
+        <omgdc:Bounds height="35.0" width="35.0" x="140.0" y="160.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="purchaser_send_order_to_supplier" id="BPMNShape_purchaser_send_order_to_supplier">
+        <omgdc:Bounds height="55.0" width="105.0" x="280.0" y="150.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="supplier_receive_and_reply" id="BPMNShape_supplier_receive_and_reply">
+        <omgdc:Bounds height="55.0" width="105.0" x="430.0" y="150.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="endevent1" id="BPMNShape_endevent1">
+        <omgdc:Bounds height="35.0" width="35.0" x="580.0" y="160.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge bpmnElement="flow1" id="BPMNEdge_flow1">
+        <omgdi:waypoint x="175.0" y="177.0"></omgdi:waypoint>
+        <omgdi:waypoint x="280.0" y="177.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow2" id="BPMNEdge_flow2">
+        <omgdi:waypoint x="385.0" y="177.0"></omgdi:waypoint>
+        <omgdi:waypoint x="430.0" y="177.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow3" id="BPMNEdge_flow3">
+        <omgdi:waypoint x="535.0" y="177.0"></omgdi:waypoint>
+        <omgdi:waypoint x="580.0" y="177.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</definitions>

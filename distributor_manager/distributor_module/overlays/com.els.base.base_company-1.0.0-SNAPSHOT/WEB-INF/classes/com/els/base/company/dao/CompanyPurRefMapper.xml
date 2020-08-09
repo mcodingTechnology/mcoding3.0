@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.els.base.company.dao.CompanyPurRefMapper" >
+  <resultMap id="BaseResultMap" type="com.els.base.company.entity.CompanyPurRef" >
+    <id column="ID" property="id" jdbcType="VARCHAR" />
+    <result column="PROJECT_ID" property="projectId" jdbcType="VARCHAR" />
+    <result column="USER_ID" property="userId" jdbcType="VARCHAR" />
+    <result column="PUR_COMPANY_ID" property="purCompanyId" jdbcType="VARCHAR" />
+    <result column="DEPARTMENT_ID" property="departmentId" jdbcType="VARCHAR" />
+    <result column="SUP_COMPANY_ID" property="supCompanyId" jdbcType="VARCHAR" />
+    <result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ID, PROJECT_ID, USER_ID, PUR_COMPANY_ID, DEPARTMENT_ID, SUP_COMPANY_ID, CREATE_TIME
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.els.base.company.entity.CompanyPurRefExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from T_BASE_COMPANY_PUR_REF
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from T_BASE_COMPANY_PUR_REF
+    where ID = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from T_BASE_COMPANY_PUR_REF
+    where ID = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.els.base.company.entity.CompanyPurRefExample" >
+    delete from T_BASE_COMPANY_PUR_REF
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.els.base.company.entity.CompanyPurRef" >
+    <bind name="_uuid" value="@com.els.base.utils.uuid.UUIDGenerator@generateUUIDAndSetId(#this)"/>
+    insert into T_BASE_COMPANY_PUR_REF (ID, PROJECT_ID, USER_ID, PUR_COMPANY_ID, 
+      DEPARTMENT_ID, SUP_COMPANY_ID, CREATE_TIME
+      )
+    values (#{_uuid}, #{projectId,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, #{purCompanyId,jdbcType=VARCHAR}, 
+      #{departmentId,jdbcType=VARCHAR}, #{supCompanyId,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.els.base.company.entity.CompanyPurRef" >
+    <bind name="_uuid" value="@com.els.base.utils.uuid.UUIDGenerator@generateUUIDAndSetId(#this)"/>
+    insert into T_BASE_COMPANY_PUR_REF
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      ID,
+      <if test="projectId != null" >
+        PROJECT_ID,
+      </if>
+      <if test="userId != null" >
+        USER_ID,
+      </if>
+      <if test="purCompanyId != null" >
+        PUR_COMPANY_ID,
+      </if>
+      <if test="departmentId != null" >
+        DEPARTMENT_ID,
+      </if>
+      <if test="supCompanyId != null" >
+        SUP_COMPANY_ID,
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      #{_uuid},
+      <if test="projectId != null" >
+        #{projectId,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="purCompanyId != null" >
+        #{purCompanyId,jdbcType=VARCHAR},
+      </if>
+      <if test="departmentId != null" >
+        #{departmentId,jdbcType=VARCHAR},
+      </if>
+      <if test="supCompanyId != null" >
+        #{supCompanyId,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.els.base.company.entity.CompanyPurRefExample" resultType="java.lang.Integer" >
+    select count(*) from T_BASE_COMPANY_PUR_REF
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update T_BASE_COMPANY_PUR_REF
+    <set >
+      <if test="record.id != null" >
+        ID = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.projectId != null" >
+        PROJECT_ID = #{record.projectId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userId != null" >
+        USER_ID = #{record.userId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.purCompanyId != null" >
+        PUR_COMPANY_ID = #{record.purCompanyId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.departmentId != null" >
+        DEPARTMENT_ID = #{record.departmentId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.supCompanyId != null" >
+        SUP_COMPANY_ID = #{record.supCompanyId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null" >
+        CREATE_TIME = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update T_BASE_COMPANY_PUR_REF
+    set ID = #{record.id,jdbcType=VARCHAR},
+      PROJECT_ID = #{record.projectId,jdbcType=VARCHAR},
+      USER_ID = #{record.userId,jdbcType=VARCHAR},
+      PUR_COMPANY_ID = #{record.purCompanyId,jdbcType=VARCHAR},
+      DEPARTMENT_ID = #{record.departmentId,jdbcType=VARCHAR},
+      SUP_COMPANY_ID = #{record.supCompanyId,jdbcType=VARCHAR},
+      CREATE_TIME = #{record.createTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.els.base.company.entity.CompanyPurRef" >
+    update T_BASE_COMPANY_PUR_REF
+    <set >
+      <if test="projectId != null" >
+        PROJECT_ID = #{projectId,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null" >
+        USER_ID = #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="purCompanyId != null" >
+        PUR_COMPANY_ID = #{purCompanyId,jdbcType=VARCHAR},
+      </if>
+      <if test="departmentId != null" >
+        DEPARTMENT_ID = #{departmentId,jdbcType=VARCHAR},
+      </if>
+      <if test="supCompanyId != null" >
+        SUP_COMPANY_ID = #{supCompanyId,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.els.base.company.entity.CompanyPurRef" >
+    update T_BASE_COMPANY_PUR_REF
+    set PROJECT_ID = #{projectId,jdbcType=VARCHAR},
+      USER_ID = #{userId,jdbcType=VARCHAR},
+      PUR_COMPANY_ID = #{purCompanyId,jdbcType=VARCHAR},
+      DEPARTMENT_ID = #{departmentId,jdbcType=VARCHAR},
+      SUP_COMPANY_ID = #{supCompanyId,jdbcType=VARCHAR},
+      CREATE_TIME = #{createTime,jdbcType=TIMESTAMP}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <insert id="insertBatch" parameterType="com.els.base.company.entity.CompanyPurRef" >
+    insert into T_BASE_COMPANY_PUR_REF (ID, PROJECT_ID, USER_ID, 
+      PUR_COMPANY_ID, DEPARTMENT_ID, SUP_COMPANY_ID, 
+      CREATE_TIME) values 
+    <foreach collection="list" item="item" index="index" separator="," >
+      (#{item.id,jdbcType=VARCHAR}, #{item.projectId,jdbcType=VARCHAR}, #{item.userId,jdbcType=VARCHAR}, 
+        #{item.purCompanyId,jdbcType=VARCHAR}, #{item.departmentId,jdbcType=VARCHAR}, #{item.supCompanyId,jdbcType=VARCHAR}, 
+        #{item.createTime,jdbcType=TIMESTAMP})
+    </foreach>
+  </insert>
+  <select id="selectByExampleByPage" resultMap="BaseResultMap" parameterType="com.els.base.company.entity.CompanyPurRefExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from T_BASE_COMPANY_PUR_REF
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+</mapper>

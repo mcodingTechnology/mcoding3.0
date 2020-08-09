@@ -1,0 +1,443 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.els.base.company.dao.CompanyAddressMapper" >
+  <resultMap id="BaseResultMap" type="com.els.base.company.entity.CompanyAddress" >
+    <id column="ID" property="id" jdbcType="VARCHAR" />
+    <result column="PROJECT_ID" property="projectId" jdbcType="VARCHAR" />
+    <result column="COMPANY_ID" property="companyId" jdbcType="VARCHAR" />
+    <result column="ADDRESS_NAME" property="addressName" jdbcType="VARCHAR" />
+    <result column="ADDRESS" property="address" jdbcType="VARCHAR" />
+    <result column="IS_ENABLE" property="isEnable" jdbcType="INTEGER" />
+    <result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="UPDATE_TIME" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="ADDRESS_CODE" property="addressCode" jdbcType="VARCHAR" />
+    <result column="LANGUAGE_CODE" property="languageCode" jdbcType="VARCHAR" />
+    <result column="DEFAULT_ADDRESS" property="defaultAddress" jdbcType="INTEGER" />
+    <result column="ADDRESS_TYPE" property="addressType" jdbcType="VARCHAR" />
+    <result column="CONTACT_ID" property="contactId" jdbcType="VARCHAR" />
+    <result column="CONTACT_NAME" property="contactName" jdbcType="VARCHAR" />
+    <result column="CONTACT_PHONE" property="contactPhone" jdbcType="VARCHAR" />
+    <result column="ATTA_FILE_ID" property="attaFileId" jdbcType="VARCHAR" />
+    <result column="ATTA_FILE_URL" property="attaFileUrl" jdbcType="VARCHAR" />
+    <result column="ATTA_FILE_NAME" property="attaFileName" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ID, PROJECT_ID, COMPANY_ID, ADDRESS_NAME, ADDRESS, IS_ENABLE, CREATE_TIME, UPDATE_TIME, 
+    ADDRESS_CODE, LANGUAGE_CODE, DEFAULT_ADDRESS, ADDRESS_TYPE, CONTACT_ID, CONTACT_NAME, 
+    CONTACT_PHONE, ATTA_FILE_ID, ATTA_FILE_URL, ATTA_FILE_NAME
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.els.base.company.entity.CompanyAddressExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from t_base_company_address
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_base_company_address
+    where ID = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from t_base_company_address
+    where ID = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.els.base.company.entity.CompanyAddressExample" >
+    delete from t_base_company_address
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.els.base.company.entity.CompanyAddress" >
+    <bind name="_uuid" value="@com.els.base.utils.uuid.UUIDGenerator@generateUUIDAndSetId(#this)"/>
+    insert into t_base_company_address (ID, PROJECT_ID, COMPANY_ID, ADDRESS_NAME, 
+      ADDRESS, IS_ENABLE, CREATE_TIME, 
+      UPDATE_TIME, ADDRESS_CODE, LANGUAGE_CODE, 
+      DEFAULT_ADDRESS, ADDRESS_TYPE, CONTACT_ID, 
+      CONTACT_NAME, CONTACT_PHONE, ATTA_FILE_ID, 
+      ATTA_FILE_URL, ATTA_FILE_NAME)
+    values (#{_uuid}, #{projectId,jdbcType=VARCHAR}, #{companyId,jdbcType=VARCHAR}, #{addressName,jdbcType=VARCHAR}, 
+      #{address,jdbcType=VARCHAR}, #{isEnable,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updateTime,jdbcType=TIMESTAMP}, #{addressCode,jdbcType=VARCHAR}, #{languageCode,jdbcType=VARCHAR}, 
+      #{defaultAddress,jdbcType=INTEGER}, #{addressType,jdbcType=VARCHAR}, #{contactId,jdbcType=VARCHAR}, 
+      #{contactName,jdbcType=VARCHAR}, #{contactPhone,jdbcType=VARCHAR}, #{attaFileId,jdbcType=VARCHAR}, 
+      #{attaFileUrl,jdbcType=VARCHAR}, #{attaFileName,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.els.base.company.entity.CompanyAddress" >
+    <bind name="_uuid" value="@com.els.base.utils.uuid.UUIDGenerator@generateUUIDAndSetId(#this)"/>
+    insert into t_base_company_address
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      ID,
+      <if test="projectId != null" >
+        PROJECT_ID,
+      </if>
+      <if test="companyId != null" >
+        COMPANY_ID,
+      </if>
+      <if test="addressName != null" >
+        ADDRESS_NAME,
+      </if>
+      <if test="address != null" >
+        ADDRESS,
+      </if>
+      <if test="isEnable != null" >
+        IS_ENABLE,
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME,
+      </if>
+      <if test="updateTime != null" >
+        UPDATE_TIME,
+      </if>
+      <if test="addressCode != null" >
+        ADDRESS_CODE,
+      </if>
+      <if test="languageCode != null" >
+        LANGUAGE_CODE,
+      </if>
+      <if test="defaultAddress != null" >
+        DEFAULT_ADDRESS,
+      </if>
+      <if test="addressType != null" >
+        ADDRESS_TYPE,
+      </if>
+      <if test="contactId != null" >
+        CONTACT_ID,
+      </if>
+      <if test="contactName != null" >
+        CONTACT_NAME,
+      </if>
+      <if test="contactPhone != null" >
+        CONTACT_PHONE,
+      </if>
+      <if test="attaFileId != null" >
+        ATTA_FILE_ID,
+      </if>
+      <if test="attaFileUrl != null" >
+        ATTA_FILE_URL,
+      </if>
+      <if test="attaFileName != null" >
+        ATTA_FILE_NAME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      #{_uuid},
+      <if test="projectId != null" >
+        #{projectId,jdbcType=VARCHAR},
+      </if>
+      <if test="companyId != null" >
+        #{companyId,jdbcType=VARCHAR},
+      </if>
+      <if test="addressName != null" >
+        #{addressName,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="isEnable != null" >
+        #{isEnable,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="addressCode != null" >
+        #{addressCode,jdbcType=VARCHAR},
+      </if>
+      <if test="languageCode != null" >
+        #{languageCode,jdbcType=VARCHAR},
+      </if>
+      <if test="defaultAddress != null" >
+        #{defaultAddress,jdbcType=INTEGER},
+      </if>
+      <if test="addressType != null" >
+        #{addressType,jdbcType=VARCHAR},
+      </if>
+      <if test="contactId != null" >
+        #{contactId,jdbcType=VARCHAR},
+      </if>
+      <if test="contactName != null" >
+        #{contactName,jdbcType=VARCHAR},
+      </if>
+      <if test="contactPhone != null" >
+        #{contactPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="attaFileId != null" >
+        #{attaFileId,jdbcType=VARCHAR},
+      </if>
+      <if test="attaFileUrl != null" >
+        #{attaFileUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="attaFileName != null" >
+        #{attaFileName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.els.base.company.entity.CompanyAddressExample" resultType="java.lang.Integer" >
+    select count(*) from t_base_company_address
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update t_base_company_address
+    <set >
+      <if test="record.id != null" >
+        ID = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.projectId != null" >
+        PROJECT_ID = #{record.projectId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.companyId != null" >
+        COMPANY_ID = #{record.companyId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.addressName != null" >
+        ADDRESS_NAME = #{record.addressName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.address != null" >
+        ADDRESS = #{record.address,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isEnable != null" >
+        IS_ENABLE = #{record.isEnable,jdbcType=INTEGER},
+      </if>
+      <if test="record.createTime != null" >
+        CREATE_TIME = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateTime != null" >
+        UPDATE_TIME = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.addressCode != null" >
+        ADDRESS_CODE = #{record.addressCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.languageCode != null" >
+        LANGUAGE_CODE = #{record.languageCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.defaultAddress != null" >
+        DEFAULT_ADDRESS = #{record.defaultAddress,jdbcType=INTEGER},
+      </if>
+      <if test="record.addressType != null" >
+        ADDRESS_TYPE = #{record.addressType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.contactId != null" >
+        CONTACT_ID = #{record.contactId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.contactName != null" >
+        CONTACT_NAME = #{record.contactName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.contactPhone != null" >
+        CONTACT_PHONE = #{record.contactPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.attaFileId != null" >
+        ATTA_FILE_ID = #{record.attaFileId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.attaFileUrl != null" >
+        ATTA_FILE_URL = #{record.attaFileUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.attaFileName != null" >
+        ATTA_FILE_NAME = #{record.attaFileName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update t_base_company_address
+    set ID = #{record.id,jdbcType=VARCHAR},
+      PROJECT_ID = #{record.projectId,jdbcType=VARCHAR},
+      COMPANY_ID = #{record.companyId,jdbcType=VARCHAR},
+      ADDRESS_NAME = #{record.addressName,jdbcType=VARCHAR},
+      ADDRESS = #{record.address,jdbcType=VARCHAR},
+      IS_ENABLE = #{record.isEnable,jdbcType=INTEGER},
+      CREATE_TIME = #{record.createTime,jdbcType=TIMESTAMP},
+      UPDATE_TIME = #{record.updateTime,jdbcType=TIMESTAMP},
+      ADDRESS_CODE = #{record.addressCode,jdbcType=VARCHAR},
+      LANGUAGE_CODE = #{record.languageCode,jdbcType=VARCHAR},
+      DEFAULT_ADDRESS = #{record.defaultAddress,jdbcType=INTEGER},
+      ADDRESS_TYPE = #{record.addressType,jdbcType=VARCHAR},
+      CONTACT_ID = #{record.contactId,jdbcType=VARCHAR},
+      CONTACT_NAME = #{record.contactName,jdbcType=VARCHAR},
+      CONTACT_PHONE = #{record.contactPhone,jdbcType=VARCHAR},
+      ATTA_FILE_ID = #{record.attaFileId,jdbcType=VARCHAR},
+      ATTA_FILE_URL = #{record.attaFileUrl,jdbcType=VARCHAR},
+      ATTA_FILE_NAME = #{record.attaFileName,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.els.base.company.entity.CompanyAddress" >
+    update t_base_company_address
+    <set >
+      <if test="projectId != null" >
+        PROJECT_ID = #{projectId,jdbcType=VARCHAR},
+      </if>
+      <if test="companyId != null" >
+        COMPANY_ID = #{companyId,jdbcType=VARCHAR},
+      </if>
+      <if test="addressName != null" >
+        ADDRESS_NAME = #{addressName,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        ADDRESS = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="isEnable != null" >
+        IS_ENABLE = #{isEnable,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="addressCode != null" >
+        ADDRESS_CODE = #{addressCode,jdbcType=VARCHAR},
+      </if>
+      <if test="languageCode != null" >
+        LANGUAGE_CODE = #{languageCode,jdbcType=VARCHAR},
+      </if>
+      <if test="defaultAddress != null" >
+        DEFAULT_ADDRESS = #{defaultAddress,jdbcType=INTEGER},
+      </if>
+      <if test="addressType != null" >
+        ADDRESS_TYPE = #{addressType,jdbcType=VARCHAR},
+      </if>
+      <if test="contactId != null" >
+        CONTACT_ID = #{contactId,jdbcType=VARCHAR},
+      </if>
+      <if test="contactName != null" >
+        CONTACT_NAME = #{contactName,jdbcType=VARCHAR},
+      </if>
+      <if test="contactPhone != null" >
+        CONTACT_PHONE = #{contactPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="attaFileId != null" >
+        ATTA_FILE_ID = #{attaFileId,jdbcType=VARCHAR},
+      </if>
+      <if test="attaFileUrl != null" >
+        ATTA_FILE_URL = #{attaFileUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="attaFileName != null" >
+        ATTA_FILE_NAME = #{attaFileName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.els.base.company.entity.CompanyAddress" >
+    update t_base_company_address
+    set PROJECT_ID = #{projectId,jdbcType=VARCHAR},
+      COMPANY_ID = #{companyId,jdbcType=VARCHAR},
+      ADDRESS_NAME = #{addressName,jdbcType=VARCHAR},
+      ADDRESS = #{address,jdbcType=VARCHAR},
+      IS_ENABLE = #{isEnable,jdbcType=INTEGER},
+      CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+      ADDRESS_CODE = #{addressCode,jdbcType=VARCHAR},
+      LANGUAGE_CODE = #{languageCode,jdbcType=VARCHAR},
+      DEFAULT_ADDRESS = #{defaultAddress,jdbcType=INTEGER},
+      ADDRESS_TYPE = #{addressType,jdbcType=VARCHAR},
+      CONTACT_ID = #{contactId,jdbcType=VARCHAR},
+      CONTACT_NAME = #{contactName,jdbcType=VARCHAR},
+      CONTACT_PHONE = #{contactPhone,jdbcType=VARCHAR},
+      ATTA_FILE_ID = #{attaFileId,jdbcType=VARCHAR},
+      ATTA_FILE_URL = #{attaFileUrl,jdbcType=VARCHAR},
+      ATTA_FILE_NAME = #{attaFileName,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <select id="selectByExampleByPage" resultMap="BaseResultMap" parameterType="com.els.base.company.entity.CompanyAddressExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from t_base_company_address
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <!-- 新增，非自动生成 -->
+  <insert id="insertBatch" parameterType="com.els.base.company.entity.CompanyAddress" >
+    insert into T_BASE_COMPANY_ADDRESS (ID, PROJECT_ID, COMPANY_ID, 
+      ADDRESS_NAME, ADDRESS, IS_ENABLE, 
+      CREATE_TIME, UPDATE_TIME, ADDRESS_CODE, 
+      LANGUAGE_CODE, DEFAULT_ADDRESS) values 
+    <foreach collection="list" item="item" index="index" separator="," >
+      (#{item.id,jdbcType=VARCHAR}, #{item.projectId,jdbcType=VARCHAR}, #{item.companyId,jdbcType=VARCHAR}, 
+        #{item.addressName,jdbcType=VARCHAR}, #{item.address,jdbcType=VARCHAR}, #{item.isEnable,jdbcType=INTEGER}, 
+        #{item.createTime,jdbcType=TIMESTAMP}, #{item.updateTime,jdbcType=TIMESTAMP}, #{item.addressCode,jdbcType=VARCHAR}, 
+        #{item.languageCode,jdbcType=VARCHAR}, #{item.defaultAddress,jdbcType=INTEGER})
+    </foreach>
+  </insert>
+</mapper>

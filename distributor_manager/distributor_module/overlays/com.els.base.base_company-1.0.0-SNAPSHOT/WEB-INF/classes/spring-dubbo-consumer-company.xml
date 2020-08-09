@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+     xmlns:context="http://www.springframework.org/schema/context"
+     xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+     xsi:schemaLocation="
+     http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+     http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+     http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+     
+    <dubbo:reference interface="com.els.base.company.service.CompanyService" id="defaultCompanyService"  />
+    <dubbo:reference interface="com.els.base.company.service.CompanyPurRefService" id="defaultCompanyPurRefService"  />
+    <dubbo:reference interface="com.els.base.company.service.CompanyUserRefService" id="defaultCompanyUserRefService"  />
+    <dubbo:reference interface="com.els.base.company.service.DepartmentService" id="defaultDepartmentService"  />
+    <dubbo:reference interface="com.els.base.company.service.IndustryService" id="defaultIndustryService"  />
+    <dubbo:reference interface="com.els.base.company.service.UserColumnDefinedService" id="defaultUserColumnDefinedService"  />
+</beans>

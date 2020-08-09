@@ -1,0 +1,336 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.els.base.codegenerator.dao.GenerateCodeMapper" >
+  <resultMap id="BaseResultMap" type="com.els.base.codegenerator.entity.GenerateCode" >
+    <id column="ID" property="id" jdbcType="VARCHAR" />
+    <result column="NAME" property="name" jdbcType="VARCHAR" />
+    <result column="TARGET_CODE" property="targetCode" jdbcType="VARCHAR" />
+    <result column="STRATEGY" property="strategy" jdbcType="VARCHAR" />
+    <result column="PREFIX" property="prefix" jdbcType="VARCHAR" />
+    <result column="SUFFIX" property="suffix" jdbcType="VARCHAR" />
+    <result column="CURRENT_CODE" property="currentCode" jdbcType="VARCHAR" />
+    <result column="START_CODE" property="startCode" jdbcType="VARCHAR" />
+    <result column="MAX_CODE" property="maxCode" jdbcType="VARCHAR" />
+    <result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="UPDATE_TIME" property="updateTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ID, NAME, TARGET_CODE, STRATEGY, PREFIX, SUFFIX, CURRENT_CODE, START_CODE, MAX_CODE, 
+    CREATE_TIME, UPDATE_TIME
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.els.base.codegenerator.entity.GenerateCodeExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from T_BASE_GENERATE_CODE
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from T_BASE_GENERATE_CODE
+    where ID = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from T_BASE_GENERATE_CODE
+    where ID = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.els.base.codegenerator.entity.GenerateCodeExample" >
+    delete from T_BASE_GENERATE_CODE
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.els.base.codegenerator.entity.GenerateCode" >
+    <bind name="_uuid" value="@com.els.base.utils.uuid.UUIDGenerator@generateUUIDAndSetId(#this)"/>
+    insert into T_BASE_GENERATE_CODE (ID, NAME, TARGET_CODE, 
+      STRATEGY, PREFIX, SUFFIX, 
+      CURRENT_CODE, START_CODE, MAX_CODE, 
+      CREATE_TIME, UPDATE_TIME)
+    values (#{id,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{targetCode,jdbcType=VARCHAR}, 
+      #{strategy,jdbcType=VARCHAR}, #{prefix,jdbcType=VARCHAR}, #{suffix,jdbcType=VARCHAR}, 
+      #{currentCode,jdbcType=VARCHAR}, #{startCode,jdbcType=VARCHAR}, #{maxCode,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.els.base.codegenerator.entity.GenerateCode" >
+    <bind name="_uuid" value="@com.els.base.utils.uuid.UUIDGenerator@generateUUIDAndSetId(#this)"/>
+    insert into T_BASE_GENERATE_CODE
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="name != null" >
+        NAME,
+      </if>
+      <if test="targetCode != null" >
+        TARGET_CODE,
+      </if>
+      <if test="strategy != null" >
+        STRATEGY,
+      </if>
+      <if test="prefix != null" >
+        PREFIX,
+      </if>
+      <if test="suffix != null" >
+        SUFFIX,
+      </if>
+      <if test="currentCode != null" >
+        CURRENT_CODE,
+      </if>
+      <if test="startCode != null" >
+        START_CODE,
+      </if>
+      <if test="maxCode != null" >
+        MAX_CODE,
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME,
+      </if>
+      <if test="updateTime != null" >
+        UPDATE_TIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="targetCode != null" >
+        #{targetCode,jdbcType=VARCHAR},
+      </if>
+      <if test="strategy != null" >
+        #{strategy,jdbcType=VARCHAR},
+      </if>
+      <if test="prefix != null" >
+        #{prefix,jdbcType=VARCHAR},
+      </if>
+      <if test="suffix != null" >
+        #{suffix,jdbcType=VARCHAR},
+      </if>
+      <if test="currentCode != null" >
+        #{currentCode,jdbcType=VARCHAR},
+      </if>
+      <if test="startCode != null" >
+        #{startCode,jdbcType=VARCHAR},
+      </if>
+      <if test="maxCode != null" >
+        #{maxCode,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.els.base.codegenerator.entity.GenerateCodeExample" resultType="java.lang.Integer" >
+    select count(*) from T_BASE_GENERATE_CODE
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update T_BASE_GENERATE_CODE
+    <set >
+      <if test="record.id != null" >
+        ID = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.name != null" >
+        NAME = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.targetCode != null" >
+        TARGET_CODE = #{record.targetCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.strategy != null" >
+        STRATEGY = #{record.strategy,jdbcType=VARCHAR},
+      </if>
+      <if test="record.prefix != null" >
+        PREFIX = #{record.prefix,jdbcType=VARCHAR},
+      </if>
+      <if test="record.suffix != null" >
+        SUFFIX = #{record.suffix,jdbcType=VARCHAR},
+      </if>
+      <if test="record.currentCode != null" >
+        CURRENT_CODE = #{record.currentCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.startCode != null" >
+        START_CODE = #{record.startCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.maxCode != null" >
+        MAX_CODE = #{record.maxCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null" >
+        CREATE_TIME = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateTime != null" >
+        UPDATE_TIME = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update T_BASE_GENERATE_CODE
+    set ID = #{record.id,jdbcType=VARCHAR},
+      NAME = #{record.name,jdbcType=VARCHAR},
+      TARGET_CODE = #{record.targetCode,jdbcType=VARCHAR},
+      STRATEGY = #{record.strategy,jdbcType=VARCHAR},
+      PREFIX = #{record.prefix,jdbcType=VARCHAR},
+      SUFFIX = #{record.suffix,jdbcType=VARCHAR},
+      CURRENT_CODE = #{record.currentCode,jdbcType=VARCHAR},
+      START_CODE = #{record.startCode,jdbcType=VARCHAR},
+      MAX_CODE = #{record.maxCode,jdbcType=VARCHAR},
+      CREATE_TIME = #{record.createTime,jdbcType=TIMESTAMP},
+      UPDATE_TIME = #{record.updateTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.els.base.codegenerator.entity.GenerateCode" >
+    update T_BASE_GENERATE_CODE
+    <set >
+      <if test="name != null" >
+        NAME = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="targetCode != null" >
+        TARGET_CODE = #{targetCode,jdbcType=VARCHAR},
+      </if>
+      <if test="strategy != null" >
+        STRATEGY = #{strategy,jdbcType=VARCHAR},
+      </if>
+      <if test="prefix != null" >
+        PREFIX = #{prefix,jdbcType=VARCHAR},
+      </if>
+      <if test="suffix != null" >
+        SUFFIX = #{suffix,jdbcType=VARCHAR},
+      </if>
+      <if test="currentCode != null" >
+        CURRENT_CODE = #{currentCode,jdbcType=VARCHAR},
+      </if>
+      <if test="startCode != null" >
+        START_CODE = #{startCode,jdbcType=VARCHAR},
+      </if>
+      <if test="maxCode != null" >
+        MAX_CODE = #{maxCode,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.els.base.codegenerator.entity.GenerateCode" >
+    update T_BASE_GENERATE_CODE
+    set NAME = #{name,jdbcType=VARCHAR},
+      TARGET_CODE = #{targetCode,jdbcType=VARCHAR},
+      STRATEGY = #{strategy,jdbcType=VARCHAR},
+      PREFIX = #{prefix,jdbcType=VARCHAR},
+      SUFFIX = #{suffix,jdbcType=VARCHAR},
+      CURRENT_CODE = #{currentCode,jdbcType=VARCHAR},
+      START_CODE = #{startCode,jdbcType=VARCHAR},
+      MAX_CODE = #{maxCode,jdbcType=VARCHAR},
+      CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <insert id="insertBatch" parameterType="com.els.base.codegenerator.entity.GenerateCode" >
+    insert into T_BASE_GENERATE_CODE (ID, NAME, TARGET_CODE, 
+      STRATEGY, PREFIX, SUFFIX, 
+      CURRENT_CODE, START_CODE, MAX_CODE, 
+      CREATE_TIME, UPDATE_TIME) values 
+    <foreach collection="list" item="item" index="index" separator="," >
+      (#{item.id,jdbcType=VARCHAR}, #{item.name,jdbcType=VARCHAR}, #{item.targetCode,jdbcType=VARCHAR}, 
+        #{item.strategy,jdbcType=VARCHAR}, #{item.prefix,jdbcType=VARCHAR}, #{item.suffix,jdbcType=VARCHAR}, 
+        #{item.currentCode,jdbcType=VARCHAR}, #{item.startCode,jdbcType=VARCHAR}, #{item.maxCode,jdbcType=VARCHAR}, 
+        #{item.createTime,jdbcType=TIMESTAMP}, #{item.updateTime,jdbcType=TIMESTAMP})
+    </foreach>
+  </insert>
+  <select id="selectByExampleByPage" resultMap="BaseResultMap" parameterType="com.els.base.codegenerator.entity.GenerateCodeExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from T_BASE_GENERATE_CODE
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+</mapper>

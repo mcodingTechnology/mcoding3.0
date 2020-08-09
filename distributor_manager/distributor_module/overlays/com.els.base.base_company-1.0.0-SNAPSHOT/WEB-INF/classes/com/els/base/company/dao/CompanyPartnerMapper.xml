@@ -1,0 +1,288 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.els.base.company.dao.CompanyPartnerMapper" >
+  <resultMap id="BaseResultMap" type="com.els.base.company.entity.CompanyPartner" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="project_id" property="projectId" jdbcType="VARCHAR" />
+    <result column="company_id" property="companyId" jdbcType="VARCHAR" />
+    <result column="partner_company_id" property="partnerCompanyId" jdbcType="VARCHAR" />
+    <result column="partner_company_name" property="partnerCompanyName" jdbcType="VARCHAR" />
+    <result column="partner_role_name" property="partnerRoleName" jdbcType="VARCHAR" />
+    <result column="partner_role_code" property="partnerRoleCode" jdbcType="VARCHAR" />
+    <result column="partner_category_id" property="partnerCategoryId" jdbcType="VARCHAR" />
+    <result column="partner_category_name" property="partnerCategoryName" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, project_id, company_id, partner_company_id, partner_company_name, partner_role_name, 
+    partner_role_code, partner_category_id, partner_category_name
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.els.base.company.entity.CompanyPartnerExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from T_BASE_COMPANY_PARTNER
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from T_BASE_COMPANY_PARTNER
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from T_BASE_COMPANY_PARTNER
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.els.base.company.entity.CompanyPartnerExample" >
+    delete from T_BASE_COMPANY_PARTNER
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.els.base.company.entity.CompanyPartner" >
+    <bind name="_uuid" value="@com.els.base.utils.uuid.UUIDGenerator@generateUUIDAndSetId(#this)"/>
+    insert into T_BASE_COMPANY_PARTNER (id, project_id, company_id, partner_company_id, 
+      partner_company_name, partner_role_name, partner_role_code, 
+      partner_category_id, partner_category_name)
+    values (#{_uuid}, #{projectId,jdbcType=VARCHAR}, #{companyId,jdbcType=VARCHAR}, #{partnerCompanyId,jdbcType=VARCHAR}, 
+      #{partnerCompanyName,jdbcType=VARCHAR}, #{partnerRoleName,jdbcType=VARCHAR}, #{partnerRoleCode,jdbcType=VARCHAR}, 
+      #{partnerCategoryId,jdbcType=VARCHAR}, #{partnerCategoryName,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.els.base.company.entity.CompanyPartner" >
+    <bind name="_uuid" value="@com.els.base.utils.uuid.UUIDGenerator@generateUUIDAndSetId(#this)"/>
+    insert into T_BASE_COMPANY_PARTNER
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      id,
+      <if test="projectId != null" >
+        project_id,
+      </if>
+      <if test="companyId != null" >
+        company_id,
+      </if>
+      <if test="partnerCompanyId != null" >
+        partner_company_id,
+      </if>
+      <if test="partnerCompanyName != null" >
+        partner_company_name,
+      </if>
+      <if test="partnerRoleName != null" >
+        partner_role_name,
+      </if>
+      <if test="partnerRoleCode != null" >
+        partner_role_code,
+      </if>
+      <if test="partnerCategoryId != null" >
+        partner_category_id,
+      </if>
+      <if test="partnerCategoryName != null" >
+        partner_category_name,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      #{_uuid},
+      <if test="projectId != null" >
+        #{projectId,jdbcType=VARCHAR},
+      </if>
+      <if test="companyId != null" >
+        #{companyId,jdbcType=VARCHAR},
+      </if>
+      <if test="partnerCompanyId != null" >
+        #{partnerCompanyId,jdbcType=VARCHAR},
+      </if>
+      <if test="partnerCompanyName != null" >
+        #{partnerCompanyName,jdbcType=VARCHAR},
+      </if>
+      <if test="partnerRoleName != null" >
+        #{partnerRoleName,jdbcType=VARCHAR},
+      </if>
+      <if test="partnerRoleCode != null" >
+        #{partnerRoleCode,jdbcType=VARCHAR},
+      </if>
+      <if test="partnerCategoryId != null" >
+        #{partnerCategoryId,jdbcType=VARCHAR},
+      </if>
+      <if test="partnerCategoryName != null" >
+        #{partnerCategoryName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.els.base.company.entity.CompanyPartnerExample" resultType="java.lang.Integer" >
+    select count(*) from T_BASE_COMPANY_PARTNER
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update T_BASE_COMPANY_PARTNER
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.projectId != null" >
+        project_id = #{record.projectId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.companyId != null" >
+        company_id = #{record.companyId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.partnerCompanyId != null" >
+        partner_company_id = #{record.partnerCompanyId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.partnerCompanyName != null" >
+        partner_company_name = #{record.partnerCompanyName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.partnerRoleName != null" >
+        partner_role_name = #{record.partnerRoleName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.partnerRoleCode != null" >
+        partner_role_code = #{record.partnerRoleCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.partnerCategoryId != null" >
+        partner_category_id = #{record.partnerCategoryId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.partnerCategoryName != null" >
+        partner_category_name = #{record.partnerCategoryName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update T_BASE_COMPANY_PARTNER
+    set id = #{record.id,jdbcType=VARCHAR},
+      project_id = #{record.projectId,jdbcType=VARCHAR},
+      company_id = #{record.companyId,jdbcType=VARCHAR},
+      partner_company_id = #{record.partnerCompanyId,jdbcType=VARCHAR},
+      partner_company_name = #{record.partnerCompanyName,jdbcType=VARCHAR},
+      partner_role_name = #{record.partnerRoleName,jdbcType=VARCHAR},
+      partner_role_code = #{record.partnerRoleCode,jdbcType=VARCHAR},
+      partner_category_id = #{record.partnerCategoryId,jdbcType=VARCHAR},
+      partner_category_name = #{record.partnerCategoryName,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.els.base.company.entity.CompanyPartner" >
+    update T_BASE_COMPANY_PARTNER
+    <set >
+      <if test="projectId != null" >
+        project_id = #{projectId,jdbcType=VARCHAR},
+      </if>
+      <if test="companyId != null" >
+        company_id = #{companyId,jdbcType=VARCHAR},
+      </if>
+      <if test="partnerCompanyId != null" >
+        partner_company_id = #{partnerCompanyId,jdbcType=VARCHAR},
+      </if>
+      <if test="partnerCompanyName != null" >
+        partner_company_name = #{partnerCompanyName,jdbcType=VARCHAR},
+      </if>
+      <if test="partnerRoleName != null" >
+        partner_role_name = #{partnerRoleName,jdbcType=VARCHAR},
+      </if>
+      <if test="partnerRoleCode != null" >
+        partner_role_code = #{partnerRoleCode,jdbcType=VARCHAR},
+      </if>
+      <if test="partnerCategoryId != null" >
+        partner_category_id = #{partnerCategoryId,jdbcType=VARCHAR},
+      </if>
+      <if test="partnerCategoryName != null" >
+        partner_category_name = #{partnerCategoryName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.els.base.company.entity.CompanyPartner" >
+    update T_BASE_COMPANY_PARTNER
+    set project_id = #{projectId,jdbcType=VARCHAR},
+      company_id = #{companyId,jdbcType=VARCHAR},
+      partner_company_id = #{partnerCompanyId,jdbcType=VARCHAR},
+      partner_company_name = #{partnerCompanyName,jdbcType=VARCHAR},
+      partner_role_name = #{partnerRoleName,jdbcType=VARCHAR},
+      partner_role_code = #{partnerRoleCode,jdbcType=VARCHAR},
+      partner_category_id = #{partnerCategoryId,jdbcType=VARCHAR},
+      partner_category_name = #{partnerCategoryName,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <select id="selectByExampleByPage" resultMap="BaseResultMap" parameterType="com.els.base.company.entity.CompanyPartnerExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from T_BASE_COMPANY_PARTNER
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+</mapper>

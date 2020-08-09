@@ -1,0 +1,1188 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.els.base.company.dao.CompanyMapper" >
+  <resultMap id="BaseResultMap" type="com.els.base.company.entity.Company" >
+    <id column="ID" property="id" jdbcType="VARCHAR" />
+    <result column="PARENT_ID" property="parentId" jdbcType="VARCHAR" />
+    <result column="PROJECT_ID" property="projectId" jdbcType="VARCHAR" />
+    <result column="INDUSTRY" property="industry" jdbcType="VARCHAR" />
+    <result column="SUB_INDUSTRY" property="subIndustry" jdbcType="VARCHAR" />
+    <result column="COMPANY_CODE" property="companyCode" jdbcType="VARCHAR" />
+    <result column="COMPANY_SAP_CODE" property="companySapCode" jdbcType="VARCHAR" />
+    <result column="COMPANY_NAME" property="companyName" jdbcType="VARCHAR" />
+    <result column="COMPANY_FULL_NAME" property="companyFullName" jdbcType="VARCHAR" />
+    <result column="COMPANY_TYPE" property="companyType" jdbcType="VARCHAR" />
+    <result column="BUSINESS_SCOP" property="businessScop" jdbcType="VARCHAR" />
+    <result column="TAX_CERT" property="taxCert" jdbcType="VARCHAR" />
+    <result column="ORGANZATION_CERT" property="organzationCert" jdbcType="VARCHAR" />
+    <result column="BUSINESS_LICENCE" property="businessLicence" jdbcType="VARCHAR" />
+    <result column="COUNTRY" property="country" jdbcType="VARCHAR" />
+    <result column="PROVINCE" property="province" jdbcType="VARCHAR" />
+    <result column="CITY" property="city" jdbcType="VARCHAR" />
+    <result column="ADDRESS" property="address" jdbcType="VARCHAR" />
+    <result column="MOBILEPHONE" property="mobilephone" jdbcType="VARCHAR" />
+    <result column="TELEPHONE" property="telephone" jdbcType="VARCHAR" />
+    <result column="FAX" property="fax" jdbcType="VARCHAR" />
+    <result column="EMAIL" property="email" jdbcType="VARCHAR" />
+    <result column="WEBSITE" property="website" jdbcType="VARCHAR" />
+    <result column="REMARK" property="remark" jdbcType="VARCHAR" />
+    <result column="CONTACTS" property="contacts" jdbcType="VARCHAR" />
+    <result column="STATUS" property="status" jdbcType="DECIMAL" />
+    <result column="IS_ENABLE" property="isEnable" jdbcType="INTEGER" />
+    <result column="EXTERNAL_MANUFACTURER" property="externalManufacturer" jdbcType="VARCHAR" />
+    <result column="PURCHASING_STAFF" property="purchasingStaff" jdbcType="VARCHAR" />
+    <result column="GROUP_CODE" property="groupCode" jdbcType="VARCHAR" />
+    <result column="DELEGATE_TYPE" property="delegateType" jdbcType="VARCHAR" />
+    <result column="BUSINESS_TYPE" property="businessType" jdbcType="VARCHAR" />
+    <result column="INDUSTRIAL_TYPE" property="industrialType" jdbcType="VARCHAR" />
+    <result column="RECONCILIATION_ACCOUNT_CODE" property="reconciliationAccountCode" jdbcType="VARCHAR" />
+    <result column="RECONCILIATION_ACCOUNT_NAME" property="reconciliationAccountName" jdbcType="VARCHAR" />
+    <result column="PAY_CONDITIONS_CODE" property="payConditionsCode" jdbcType="VARCHAR" />
+    <result column="PAY_CONDITIONS_DESC" property="payConditionsDesc" jdbcType="VARCHAR" />
+    <result column="ORDER_CURREN" property="orderCurren" jdbcType="VARCHAR" />
+    <result column="INTERNATIONAL_TRADE_CONDITION" property="internationalTradeCondition" jdbcType="VARCHAR" />
+    <result column="SALESMAN" property="salesman" jdbcType="VARCHAR" />
+    <result column="SALESMAN_PHONE" property="salesmanPhone" jdbcType="VARCHAR" />
+    <result column="INVOICE_VERIFY" property="invoiceVerify" jdbcType="VARCHAR" />
+    <result column="AUTOMATIC_PURCHASE_ORDER" property="automaticPurchaseOrder" jdbcType="VARCHAR" />
+    <result column="PURCHASING_GROUP" property="purchasingGroup" jdbcType="VARCHAR" />
+    <result column="PLANNED_DELIVERY_TIME" property="plannedDeliveryTime" jdbcType="VARCHAR" />
+    <result column="SUPPLY_PROPERTIES" property="supplyProperties" jdbcType="VARCHAR" />
+    <result column="INDUSTRY_CODE" property="industryCode" jdbcType="VARCHAR" />
+    <result column="INDUSTRY_DESC" property="industryDesc" jdbcType="VARCHAR" />
+    <result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="BANK_NAME" property="bankName" jdbcType="VARCHAR" />
+    <result column="BANK_ADDRESS" property="bankAddress" jdbcType="VARCHAR" />
+    <result column="BANK_ACCOUNT" property="bankAccount" jdbcType="VARCHAR" />
+    <result column="BANK_TYPE" property="bankType" jdbcType="VARCHAR" />
+    <result column="LEVEL" property="level" jdbcType="INTEGER" />
+    <result column="SALE_CHANNEL" property="saleChannel" jdbcType="VARCHAR" />
+    <result column="DISTRICT" property="district" jdbcType="VARCHAR" />
+    <result column="AREA" property="area" jdbcType="VARCHAR" />
+    <result column="IS_SEND_AUTH" property="isSendAuth" jdbcType="VARCHAR" />
+    <result column="CREDIT_LIMIT" property="creditLimit" jdbcType="DECIMAL" />
+    <result column="CREDIT_LIMIT_END_TIME" property="creditLimitEndTime" jdbcType="TIMESTAMP" />
+    <result column="CLEARING_FORM" property="clearingForm" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ID, PARENT_ID, PROJECT_ID, INDUSTRY, SUB_INDUSTRY, COMPANY_CODE, COMPANY_SAP_CODE, 
+    COMPANY_NAME, COMPANY_FULL_NAME, COMPANY_TYPE, BUSINESS_SCOP, TAX_CERT, ORGANZATION_CERT, 
+    BUSINESS_LICENCE, COUNTRY, PROVINCE, CITY, ADDRESS, MOBILEPHONE, TELEPHONE, FAX, 
+    EMAIL, WEBSITE, REMARK, CONTACTS, STATUS, IS_ENABLE, EXTERNAL_MANUFACTURER, PURCHASING_STAFF, 
+    GROUP_CODE, DELEGATE_TYPE, BUSINESS_TYPE, INDUSTRIAL_TYPE, RECONCILIATION_ACCOUNT_CODE, 
+    RECONCILIATION_ACCOUNT_NAME, PAY_CONDITIONS_CODE, PAY_CONDITIONS_DESC, ORDER_CURREN, 
+    INTERNATIONAL_TRADE_CONDITION, SALESMAN, SALESMAN_PHONE, INVOICE_VERIFY, AUTOMATIC_PURCHASE_ORDER, 
+    PURCHASING_GROUP, PLANNED_DELIVERY_TIME, SUPPLY_PROPERTIES, INDUSTRY_CODE, INDUSTRY_DESC, 
+    CREATE_TIME, BANK_NAME, BANK_ADDRESS, BANK_ACCOUNT, BANK_TYPE, LEVEL, SALE_CHANNEL, 
+    DISTRICT, AREA,IS_SEND_AUTH,CREDIT_LIMIT,CREDIT_LIMIT_END_TIME,CLEARING_FORM
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.els.base.company.entity.CompanyExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from t_base_company
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_base_company
+    where ID = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from t_base_company
+    where ID = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.els.base.company.entity.CompanyExample" >
+    delete from t_base_company
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.els.base.company.entity.Company" >
+    <bind name="_uuid" value="@com.els.base.utils.uuid.UUIDGenerator@generateUUIDAndSetId(#this)"/>
+    insert into t_base_company (ID, PARENT_ID, PROJECT_ID, INDUSTRY, 
+      SUB_INDUSTRY, COMPANY_CODE, COMPANY_SAP_CODE, 
+      COMPANY_NAME, COMPANY_FULL_NAME, COMPANY_TYPE, 
+      BUSINESS_SCOP, TAX_CERT, ORGANZATION_CERT, 
+      BUSINESS_LICENCE, COUNTRY, PROVINCE, 
+      CITY, ADDRESS, MOBILEPHONE, 
+      TELEPHONE, FAX, EMAIL, 
+      WEBSITE, REMARK, CONTACTS, 
+      STATUS, IS_ENABLE, EXTERNAL_MANUFACTURER, 
+      PURCHASING_STAFF, GROUP_CODE, DELEGATE_TYPE, 
+      BUSINESS_TYPE, INDUSTRIAL_TYPE, RECONCILIATION_ACCOUNT_CODE, 
+      RECONCILIATION_ACCOUNT_NAME, PAY_CONDITIONS_CODE, 
+      PAY_CONDITIONS_DESC, ORDER_CURREN, INTERNATIONAL_TRADE_CONDITION, 
+      SALESMAN, SALESMAN_PHONE, INVOICE_VERIFY, 
+      AUTOMATIC_PURCHASE_ORDER, PURCHASING_GROUP, 
+      PLANNED_DELIVERY_TIME, SUPPLY_PROPERTIES, 
+      INDUSTRY_CODE, INDUSTRY_DESC, CREATE_TIME, 
+      BANK_NAME, BANK_ADDRESS, BANK_ACCOUNT, 
+      BANK_TYPE, LEVEL, SALE_CHANNEL, 
+      DISTRICT, AREA,IS_SEND_AUTH,CREDIT_LIMIT,CREDIT_LIMIT_END_TIME,CLEARING_FORM)
+    values (#{_uuid}, #{parentId,jdbcType=VARCHAR}, #{projectId,jdbcType=VARCHAR}, #{industry,jdbcType=VARCHAR}, 
+      #{subIndustry,jdbcType=VARCHAR}, #{companyCode,jdbcType=VARCHAR}, #{companySapCode,jdbcType=VARCHAR}, 
+      #{companyName,jdbcType=VARCHAR}, #{companyFullName,jdbcType=VARCHAR}, #{companyType,jdbcType=VARCHAR}, 
+      #{businessScop,jdbcType=VARCHAR}, #{taxCert,jdbcType=VARCHAR}, #{organzationCert,jdbcType=VARCHAR}, 
+      #{businessLicence,jdbcType=VARCHAR}, #{country,jdbcType=VARCHAR}, #{province,jdbcType=VARCHAR}, 
+      #{city,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, #{mobilephone,jdbcType=VARCHAR}, 
+      #{telephone,jdbcType=VARCHAR}, #{fax,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, 
+      #{website,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, #{contacts,jdbcType=VARCHAR}, 
+      #{status,jdbcType=DECIMAL}, #{isEnable,jdbcType=INTEGER}, #{externalManufacturer,jdbcType=VARCHAR}, 
+      #{purchasingStaff,jdbcType=VARCHAR}, #{groupCode,jdbcType=VARCHAR}, #{delegateType,jdbcType=VARCHAR}, 
+      #{businessType,jdbcType=VARCHAR}, #{industrialType,jdbcType=VARCHAR}, #{reconciliationAccountCode,jdbcType=VARCHAR}, 
+      #{reconciliationAccountName,jdbcType=VARCHAR}, #{payConditionsCode,jdbcType=VARCHAR}, 
+      #{payConditionsDesc,jdbcType=VARCHAR}, #{orderCurren,jdbcType=VARCHAR}, #{internationalTradeCondition,jdbcType=VARCHAR}, 
+      #{salesman,jdbcType=VARCHAR}, #{salesmanPhone,jdbcType=VARCHAR}, #{invoiceVerify,jdbcType=VARCHAR}, 
+      #{automaticPurchaseOrder,jdbcType=VARCHAR}, #{purchasingGroup,jdbcType=VARCHAR}, 
+      #{plannedDeliveryTime,jdbcType=VARCHAR}, #{supplyProperties,jdbcType=VARCHAR}, 
+      #{industryCode,jdbcType=VARCHAR}, #{industryDesc,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{bankName,jdbcType=VARCHAR}, #{bankAddress,jdbcType=VARCHAR}, #{bankAccount,jdbcType=VARCHAR}, 
+      #{bankType,jdbcType=VARCHAR}, #{level,jdbcType=INTEGER}, #{saleChannel,jdbcType=VARCHAR}, 
+      #{district,jdbcType=VARCHAR}, #{area,jdbcType=VARCHAR},#{isSendAuth,jdbcType=VARCHAR},
+      #{creditLimit,jdbcType=DECIMAL},#{creditLimitEndTime,jdbcType=TIMESTAMP},#{clearingForm,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.els.base.company.entity.Company" >
+    <bind name="_uuid" value="@com.els.base.utils.uuid.UUIDGenerator@generateUUIDAndSetId(#this)"/>
+    insert into t_base_company
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      ID,
+      <if test="parentId != null" >
+        PARENT_ID,
+      </if>
+      <if test="projectId != null" >
+        PROJECT_ID,
+      </if>
+      <if test="industry != null" >
+        INDUSTRY,
+      </if>
+      <if test="subIndustry != null" >
+        SUB_INDUSTRY,
+      </if>
+      <if test="companyCode != null" >
+        COMPANY_CODE,
+      </if>
+      <if test="companySapCode != null" >
+        COMPANY_SAP_CODE,
+      </if>
+      <if test="companyName != null" >
+        COMPANY_NAME,
+      </if>
+      <if test="companyFullName != null" >
+        COMPANY_FULL_NAME,
+      </if>
+      <if test="companyType != null" >
+        COMPANY_TYPE,
+      </if>
+      <if test="businessScop != null" >
+        BUSINESS_SCOP,
+      </if>
+      <if test="taxCert != null" >
+        TAX_CERT,
+      </if>
+      <if test="organzationCert != null" >
+        ORGANZATION_CERT,
+      </if>
+      <if test="businessLicence != null" >
+        BUSINESS_LICENCE,
+      </if>
+      <if test="country != null" >
+        COUNTRY,
+      </if>
+      <if test="province != null" >
+        PROVINCE,
+      </if>
+      <if test="city != null" >
+        CITY,
+      </if>
+      <if test="address != null" >
+        ADDRESS,
+      </if>
+      <if test="mobilephone != null" >
+        MOBILEPHONE,
+      </if>
+      <if test="telephone != null" >
+        TELEPHONE,
+      </if>
+      <if test="fax != null" >
+        FAX,
+      </if>
+      <if test="email != null" >
+        EMAIL,
+      </if>
+      <if test="website != null" >
+        WEBSITE,
+      </if>
+      <if test="remark != null" >
+        REMARK,
+      </if>
+      <if test="contacts != null" >
+        CONTACTS,
+      </if>
+      <if test="status != null" >
+        STATUS,
+      </if>
+      <if test="isEnable != null" >
+        IS_ENABLE,
+      </if>
+      <if test="externalManufacturer != null" >
+        EXTERNAL_MANUFACTURER,
+      </if>
+      <if test="purchasingStaff != null" >
+        PURCHASING_STAFF,
+      </if>
+      <if test="groupCode != null" >
+        GROUP_CODE,
+      </if>
+      <if test="delegateType != null" >
+        DELEGATE_TYPE,
+      </if>
+      <if test="businessType != null" >
+        BUSINESS_TYPE,
+      </if>
+      <if test="industrialType != null" >
+        INDUSTRIAL_TYPE,
+      </if>
+      <if test="reconciliationAccountCode != null" >
+        RECONCILIATION_ACCOUNT_CODE,
+      </if>
+      <if test="reconciliationAccountName != null" >
+        RECONCILIATION_ACCOUNT_NAME,
+      </if>
+      <if test="payConditionsCode != null" >
+        PAY_CONDITIONS_CODE,
+      </if>
+      <if test="payConditionsDesc != null" >
+        PAY_CONDITIONS_DESC,
+      </if>
+      <if test="orderCurren != null" >
+        ORDER_CURREN,
+      </if>
+      <if test="internationalTradeCondition != null" >
+        INTERNATIONAL_TRADE_CONDITION,
+      </if>
+      <if test="salesman != null" >
+        SALESMAN,
+      </if>
+      <if test="salesmanPhone != null" >
+        SALESMAN_PHONE,
+      </if>
+      <if test="invoiceVerify != null" >
+        INVOICE_VERIFY,
+      </if>
+      <if test="automaticPurchaseOrder != null" >
+        AUTOMATIC_PURCHASE_ORDER,
+      </if>
+      <if test="purchasingGroup != null" >
+        PURCHASING_GROUP,
+      </if>
+      <if test="plannedDeliveryTime != null" >
+        PLANNED_DELIVERY_TIME,
+      </if>
+      <if test="supplyProperties != null" >
+        SUPPLY_PROPERTIES,
+      </if>
+      <if test="industryCode != null" >
+        INDUSTRY_CODE,
+      </if>
+      <if test="industryDesc != null" >
+        INDUSTRY_DESC,
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME,
+      </if>
+      <if test="bankName != null" >
+        BANK_NAME,
+      </if>
+      <if test="bankAddress != null" >
+        BANK_ADDRESS,
+      </if>
+      <if test="bankAccount != null" >
+        BANK_ACCOUNT,
+      </if>
+      <if test="bankType != null" >
+        BANK_TYPE,
+      </if>
+      <if test="level != null" >
+        LEVEL,
+      </if>
+      <if test="saleChannel != null" >
+        SALE_CHANNEL,
+      </if>
+      <if test="district != null" >
+        DISTRICT,
+      </if>
+      <if test="area != null" >
+        AREA,
+      </if>
+      <if test="isSendAuth != null">
+      	IS_SEND_AUTH,
+      </if>
+      <if test="creditLimit != null">
+      	CREDIT_LIMIT,
+      </if>
+      <if test="creditLimitEndTime != null">
+      	CREDIT_LIMIT_END_TIME,
+      </if>
+      <if test="clearingForm != null">
+      	CLEARING_FORM,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      #{_uuid},
+      <if test="parentId != null" >
+        #{parentId,jdbcType=VARCHAR},
+      </if>
+      <if test="projectId != null" >
+        #{projectId,jdbcType=VARCHAR},
+      </if>
+      <if test="industry != null" >
+        #{industry,jdbcType=VARCHAR},
+      </if>
+      <if test="subIndustry != null" >
+        #{subIndustry,jdbcType=VARCHAR},
+      </if>
+      <if test="companyCode != null" >
+        #{companyCode,jdbcType=VARCHAR},
+      </if>
+      <if test="companySapCode != null" >
+        #{companySapCode,jdbcType=VARCHAR},
+      </if>
+      <if test="companyName != null" >
+        #{companyName,jdbcType=VARCHAR},
+      </if>
+      <if test="companyFullName != null" >
+        #{companyFullName,jdbcType=VARCHAR},
+      </if>
+      <if test="companyType != null" >
+        #{companyType,jdbcType=VARCHAR},
+      </if>
+      <if test="businessScop != null" >
+        #{businessScop,jdbcType=VARCHAR},
+      </if>
+      <if test="taxCert != null" >
+        #{taxCert,jdbcType=VARCHAR},
+      </if>
+      <if test="organzationCert != null" >
+        #{organzationCert,jdbcType=VARCHAR},
+      </if>
+      <if test="businessLicence != null" >
+        #{businessLicence,jdbcType=VARCHAR},
+      </if>
+      <if test="country != null" >
+        #{country,jdbcType=VARCHAR},
+      </if>
+      <if test="province != null" >
+        #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null" >
+        #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="mobilephone != null" >
+        #{mobilephone,jdbcType=VARCHAR},
+      </if>
+      <if test="telephone != null" >
+        #{telephone,jdbcType=VARCHAR},
+      </if>
+      <if test="fax != null" >
+        #{fax,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="website != null" >
+        #{website,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="contacts != null" >
+        #{contacts,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=DECIMAL},
+      </if>
+      <if test="isEnable != null" >
+        #{isEnable,jdbcType=INTEGER},
+      </if>
+      <if test="externalManufacturer != null" >
+        #{externalManufacturer,jdbcType=VARCHAR},
+      </if>
+      <if test="purchasingStaff != null" >
+        #{purchasingStaff,jdbcType=VARCHAR},
+      </if>
+      <if test="groupCode != null" >
+        #{groupCode,jdbcType=VARCHAR},
+      </if>
+      <if test="delegateType != null" >
+        #{delegateType,jdbcType=VARCHAR},
+      </if>
+      <if test="businessType != null" >
+        #{businessType,jdbcType=VARCHAR},
+      </if>
+      <if test="industrialType != null" >
+        #{industrialType,jdbcType=VARCHAR},
+      </if>
+      <if test="reconciliationAccountCode != null" >
+        #{reconciliationAccountCode,jdbcType=VARCHAR},
+      </if>
+      <if test="reconciliationAccountName != null" >
+        #{reconciliationAccountName,jdbcType=VARCHAR},
+      </if>
+      <if test="payConditionsCode != null" >
+        #{payConditionsCode,jdbcType=VARCHAR},
+      </if>
+      <if test="payConditionsDesc != null" >
+        #{payConditionsDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="orderCurren != null" >
+        #{orderCurren,jdbcType=VARCHAR},
+      </if>
+      <if test="internationalTradeCondition != null" >
+        #{internationalTradeCondition,jdbcType=VARCHAR},
+      </if>
+      <if test="salesman != null" >
+        #{salesman,jdbcType=VARCHAR},
+      </if>
+      <if test="salesmanPhone != null" >
+        #{salesmanPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="invoiceVerify != null" >
+        #{invoiceVerify,jdbcType=VARCHAR},
+      </if>
+      <if test="automaticPurchaseOrder != null" >
+        #{automaticPurchaseOrder,jdbcType=VARCHAR},
+      </if>
+      <if test="purchasingGroup != null" >
+        #{purchasingGroup,jdbcType=VARCHAR},
+      </if>
+      <if test="plannedDeliveryTime != null" >
+        #{plannedDeliveryTime,jdbcType=VARCHAR},
+      </if>
+      <if test="supplyProperties != null" >
+        #{supplyProperties,jdbcType=VARCHAR},
+      </if>
+      <if test="industryCode != null" >
+        #{industryCode,jdbcType=VARCHAR},
+      </if>
+      <if test="industryDesc != null" >
+        #{industryDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="bankName != null" >
+        #{bankName,jdbcType=VARCHAR},
+      </if>
+      <if test="bankAddress != null" >
+        #{bankAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="bankAccount != null" >
+        #{bankAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="bankType != null" >
+        #{bankType,jdbcType=VARCHAR},
+      </if>
+      <if test="level != null" >
+        #{level,jdbcType=INTEGER},
+      </if>
+      <if test="saleChannel != null" >
+        #{saleChannel,jdbcType=VARCHAR},
+      </if>
+      <if test="district != null" >
+        #{district,jdbcType=VARCHAR},
+      </if>
+      <if test="area != null" >
+        #{area,jdbcType=VARCHAR},
+      </if>
+      <if test="isSendAuth != null" >
+        #{isSendAuth,jdbcType=VARCHAR},
+      </if>
+      <if test="creditLimit != null" >
+        #{creditLimit,jdbcType=DECIMAL},
+      </if>
+      <if test="creditLimitEndTime != null" >
+        #{creditLimitEndTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="clearingForm != null" >
+        #{clearingForm,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.els.base.company.entity.CompanyExample" resultType="java.lang.Integer" >
+    select count(*) from t_base_company
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update t_base_company
+    <set >
+      <if test="record.id != null" >
+        ID = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.parentId != null" >
+        PARENT_ID = #{record.parentId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.projectId != null" >
+        PROJECT_ID = #{record.projectId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.industry != null" >
+        INDUSTRY = #{record.industry,jdbcType=VARCHAR},
+      </if>
+      <if test="record.subIndustry != null" >
+        SUB_INDUSTRY = #{record.subIndustry,jdbcType=VARCHAR},
+      </if>
+      <if test="record.companyCode != null" >
+        COMPANY_CODE = #{record.companyCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.companySapCode != null" >
+        COMPANY_SAP_CODE = #{record.companySapCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.companyName != null" >
+        COMPANY_NAME = #{record.companyName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.companyFullName != null" >
+        COMPANY_FULL_NAME = #{record.companyFullName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.companyType != null" >
+        COMPANY_TYPE = #{record.companyType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.businessScop != null" >
+        BUSINESS_SCOP = #{record.businessScop,jdbcType=VARCHAR},
+      </if>
+      <if test="record.taxCert != null" >
+        TAX_CERT = #{record.taxCert,jdbcType=VARCHAR},
+      </if>
+      <if test="record.organzationCert != null" >
+        ORGANZATION_CERT = #{record.organzationCert,jdbcType=VARCHAR},
+      </if>
+      <if test="record.businessLicence != null" >
+        BUSINESS_LICENCE = #{record.businessLicence,jdbcType=VARCHAR},
+      </if>
+      <if test="record.country != null" >
+        COUNTRY = #{record.country,jdbcType=VARCHAR},
+      </if>
+      <if test="record.province != null" >
+        PROVINCE = #{record.province,jdbcType=VARCHAR},
+      </if>
+      <if test="record.city != null" >
+        CITY = #{record.city,jdbcType=VARCHAR},
+      </if>
+      <if test="record.address != null" >
+        ADDRESS = #{record.address,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mobilephone != null" >
+        MOBILEPHONE = #{record.mobilephone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.telephone != null" >
+        TELEPHONE = #{record.telephone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fax != null" >
+        FAX = #{record.fax,jdbcType=VARCHAR},
+      </if>
+      <if test="record.email != null" >
+        EMAIL = #{record.email,jdbcType=VARCHAR},
+      </if>
+      <if test="record.website != null" >
+        WEBSITE = #{record.website,jdbcType=VARCHAR},
+      </if>
+      <if test="record.remark != null" >
+        REMARK = #{record.remark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.contacts != null" >
+        CONTACTS = #{record.contacts,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null" >
+        STATUS = #{record.status,jdbcType=DECIMAL},
+      </if>
+      <if test="record.isEnable != null" >
+        IS_ENABLE = #{record.isEnable,jdbcType=INTEGER},
+      </if>
+      <if test="record.externalManufacturer != null" >
+        EXTERNAL_MANUFACTURER = #{record.externalManufacturer,jdbcType=VARCHAR},
+      </if>
+      <if test="record.purchasingStaff != null" >
+        PURCHASING_STAFF = #{record.purchasingStaff,jdbcType=VARCHAR},
+      </if>
+      <if test="record.groupCode != null" >
+        GROUP_CODE = #{record.groupCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.delegateType != null" >
+        DELEGATE_TYPE = #{record.delegateType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.businessType != null" >
+        BUSINESS_TYPE = #{record.businessType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.industrialType != null" >
+        INDUSTRIAL_TYPE = #{record.industrialType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.reconciliationAccountCode != null" >
+        RECONCILIATION_ACCOUNT_CODE = #{record.reconciliationAccountCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.reconciliationAccountName != null" >
+        RECONCILIATION_ACCOUNT_NAME = #{record.reconciliationAccountName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.payConditionsCode != null" >
+        PAY_CONDITIONS_CODE = #{record.payConditionsCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.payConditionsDesc != null" >
+        PAY_CONDITIONS_DESC = #{record.payConditionsDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orderCurren != null" >
+        ORDER_CURREN = #{record.orderCurren,jdbcType=VARCHAR},
+      </if>
+      <if test="record.internationalTradeCondition != null" >
+        INTERNATIONAL_TRADE_CONDITION = #{record.internationalTradeCondition,jdbcType=VARCHAR},
+      </if>
+      <if test="record.salesman != null" >
+        SALESMAN = #{record.salesman,jdbcType=VARCHAR},
+      </if>
+      <if test="record.salesmanPhone != null" >
+        SALESMAN_PHONE = #{record.salesmanPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.invoiceVerify != null" >
+        INVOICE_VERIFY = #{record.invoiceVerify,jdbcType=VARCHAR},
+      </if>
+      <if test="record.automaticPurchaseOrder != null" >
+        AUTOMATIC_PURCHASE_ORDER = #{record.automaticPurchaseOrder,jdbcType=VARCHAR},
+      </if>
+      <if test="record.purchasingGroup != null" >
+        PURCHASING_GROUP = #{record.purchasingGroup,jdbcType=VARCHAR},
+      </if>
+      <if test="record.plannedDeliveryTime != null" >
+        PLANNED_DELIVERY_TIME = #{record.plannedDeliveryTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.supplyProperties != null" >
+        SUPPLY_PROPERTIES = #{record.supplyProperties,jdbcType=VARCHAR},
+      </if>
+      <if test="record.industryCode != null" >
+        INDUSTRY_CODE = #{record.industryCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.industryDesc != null" >
+        INDUSTRY_DESC = #{record.industryDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null" >
+        CREATE_TIME = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.bankName != null" >
+        BANK_NAME = #{record.bankName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bankAddress != null" >
+        BANK_ADDRESS = #{record.bankAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bankAccount != null" >
+        BANK_ACCOUNT = #{record.bankAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bankType != null" >
+        BANK_TYPE = #{record.bankType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.level != null" >
+        LEVEL = #{record.level,jdbcType=INTEGER},
+      </if>
+      <if test="record.saleChannel != null" >
+        SALE_CHANNEL = #{record.saleChannel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.district != null" >
+        DISTRICT = #{record.district,jdbcType=VARCHAR},
+      </if>
+      <if test="record.area != null" >
+        AREA = #{record.area,jdbcType=VARCHAR},
+      </if>
+      <if test="isSendAuth != null" >
+        IS_SEND_AUTH = #{isSendAuth,jdbcType=VARCHAR},
+      </if>
+      <if test="creditLimit != null" >
+        CREDIT_LIMIT = #{creditLimit,jdbcType=DECIMAL},
+      </if>
+      <if test="creditLimitEndTime != null" >
+        CREDIT_LIMIT_END_TIME = #{creditLimitEndTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="clearingForm != null" >
+        CLEARING_FORM = #{clearingForm,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update t_base_company
+    set ID = #{record.id,jdbcType=VARCHAR},
+      PARENT_ID = #{record.parentId,jdbcType=VARCHAR},
+      PROJECT_ID = #{record.projectId,jdbcType=VARCHAR},
+      INDUSTRY = #{record.industry,jdbcType=VARCHAR},
+      SUB_INDUSTRY = #{record.subIndustry,jdbcType=VARCHAR},
+      COMPANY_CODE = #{record.companyCode,jdbcType=VARCHAR},
+      COMPANY_SAP_CODE = #{record.companySapCode,jdbcType=VARCHAR},
+      COMPANY_NAME = #{record.companyName,jdbcType=VARCHAR},
+      COMPANY_FULL_NAME = #{record.companyFullName,jdbcType=VARCHAR},
+      COMPANY_TYPE = #{record.companyType,jdbcType=VARCHAR},
+      BUSINESS_SCOP = #{record.businessScop,jdbcType=VARCHAR},
+      TAX_CERT = #{record.taxCert,jdbcType=VARCHAR},
+      ORGANZATION_CERT = #{record.organzationCert,jdbcType=VARCHAR},
+      BUSINESS_LICENCE = #{record.businessLicence,jdbcType=VARCHAR},
+      COUNTRY = #{record.country,jdbcType=VARCHAR},
+      PROVINCE = #{record.province,jdbcType=VARCHAR},
+      CITY = #{record.city,jdbcType=VARCHAR},
+      ADDRESS = #{record.address,jdbcType=VARCHAR},
+      MOBILEPHONE = #{record.mobilephone,jdbcType=VARCHAR},
+      TELEPHONE = #{record.telephone,jdbcType=VARCHAR},
+      FAX = #{record.fax,jdbcType=VARCHAR},
+      EMAIL = #{record.email,jdbcType=VARCHAR},
+      WEBSITE = #{record.website,jdbcType=VARCHAR},
+      REMARK = #{record.remark,jdbcType=VARCHAR},
+      CONTACTS = #{record.contacts,jdbcType=VARCHAR},
+      STATUS = #{record.status,jdbcType=DECIMAL},
+      IS_ENABLE = #{record.isEnable,jdbcType=INTEGER},
+      EXTERNAL_MANUFACTURER = #{record.externalManufacturer,jdbcType=VARCHAR},
+      PURCHASING_STAFF = #{record.purchasingStaff,jdbcType=VARCHAR},
+      GROUP_CODE = #{record.groupCode,jdbcType=VARCHAR},
+      DELEGATE_TYPE = #{record.delegateType,jdbcType=VARCHAR},
+      BUSINESS_TYPE = #{record.businessType,jdbcType=VARCHAR},
+      INDUSTRIAL_TYPE = #{record.industrialType,jdbcType=VARCHAR},
+      RECONCILIATION_ACCOUNT_CODE = #{record.reconciliationAccountCode,jdbcType=VARCHAR},
+      RECONCILIATION_ACCOUNT_NAME = #{record.reconciliationAccountName,jdbcType=VARCHAR},
+      PAY_CONDITIONS_CODE = #{record.payConditionsCode,jdbcType=VARCHAR},
+      PAY_CONDITIONS_DESC = #{record.payConditionsDesc,jdbcType=VARCHAR},
+      ORDER_CURREN = #{record.orderCurren,jdbcType=VARCHAR},
+      INTERNATIONAL_TRADE_CONDITION = #{record.internationalTradeCondition,jdbcType=VARCHAR},
+      SALESMAN = #{record.salesman,jdbcType=VARCHAR},
+      SALESMAN_PHONE = #{record.salesmanPhone,jdbcType=VARCHAR},
+      INVOICE_VERIFY = #{record.invoiceVerify,jdbcType=VARCHAR},
+      AUTOMATIC_PURCHASE_ORDER = #{record.automaticPurchaseOrder,jdbcType=VARCHAR},
+      PURCHASING_GROUP = #{record.purchasingGroup,jdbcType=VARCHAR},
+      PLANNED_DELIVERY_TIME = #{record.plannedDeliveryTime,jdbcType=VARCHAR},
+      SUPPLY_PROPERTIES = #{record.supplyProperties,jdbcType=VARCHAR},
+      INDUSTRY_CODE = #{record.industryCode,jdbcType=VARCHAR},
+      INDUSTRY_DESC = #{record.industryDesc,jdbcType=VARCHAR},
+      CREATE_TIME = #{record.createTime,jdbcType=TIMESTAMP},
+      BANK_NAME = #{record.bankName,jdbcType=VARCHAR},
+      BANK_ADDRESS = #{record.bankAddress,jdbcType=VARCHAR},
+      BANK_ACCOUNT = #{record.bankAccount,jdbcType=VARCHAR},
+      BANK_TYPE = #{record.bankType,jdbcType=VARCHAR},
+      LEVEL = #{record.level,jdbcType=INTEGER},
+      SALE_CHANNEL = #{record.saleChannel,jdbcType=VARCHAR},
+      DISTRICT = #{record.district,jdbcType=VARCHAR},
+      AREA = #{record.area,jdbcType=VARCHAR},
+      IS_SEND_AUTH = #{isSendAuth,jdbcType=VARCHAR},
+      CREDIT_LIMIT = #{creditLimit,jdbcType=DECIMAL},
+      CREDIT_LIMIT_END_TIME = #{creditLimitEndTime,jdbcType=TIMESTAMP},
+      CLEARING_FORM = #{clearingForm,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.els.base.company.entity.Company" >
+    update t_base_company
+    <set >
+      <if test="parentId != null" >
+        PARENT_ID = #{parentId,jdbcType=VARCHAR},
+      </if>
+      <if test="projectId != null" >
+        PROJECT_ID = #{projectId,jdbcType=VARCHAR},
+      </if>
+      <if test="industry != null" >
+        INDUSTRY = #{industry,jdbcType=VARCHAR},
+      </if>
+      <if test="subIndustry != null" >
+        SUB_INDUSTRY = #{subIndustry,jdbcType=VARCHAR},
+      </if>
+      <if test="companyCode != null" >
+        COMPANY_CODE = #{companyCode,jdbcType=VARCHAR},
+      </if>
+      <if test="companySapCode != null" >
+        COMPANY_SAP_CODE = #{companySapCode,jdbcType=VARCHAR},
+      </if>
+      <if test="companyName != null" >
+        COMPANY_NAME = #{companyName,jdbcType=VARCHAR},
+      </if>
+      <if test="companyFullName != null" >
+        COMPANY_FULL_NAME = #{companyFullName,jdbcType=VARCHAR},
+      </if>
+      <if test="companyType != null" >
+        COMPANY_TYPE = #{companyType,jdbcType=VARCHAR},
+      </if>
+      <if test="businessScop != null" >
+        BUSINESS_SCOP = #{businessScop,jdbcType=VARCHAR},
+      </if>
+      <if test="taxCert != null" >
+        TAX_CERT = #{taxCert,jdbcType=VARCHAR},
+      </if>
+      <if test="organzationCert != null" >
+        ORGANZATION_CERT = #{organzationCert,jdbcType=VARCHAR},
+      </if>
+      <if test="businessLicence != null" >
+        BUSINESS_LICENCE = #{businessLicence,jdbcType=VARCHAR},
+      </if>
+      <if test="country != null" >
+        COUNTRY = #{country,jdbcType=VARCHAR},
+      </if>
+      <if test="province != null" >
+        PROVINCE = #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null" >
+        CITY = #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        ADDRESS = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="mobilephone != null" >
+        MOBILEPHONE = #{mobilephone,jdbcType=VARCHAR},
+      </if>
+      <if test="telephone != null" >
+        TELEPHONE = #{telephone,jdbcType=VARCHAR},
+      </if>
+      <if test="fax != null" >
+        FAX = #{fax,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        EMAIL = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="website != null" >
+        WEBSITE = #{website,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        REMARK = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="contacts != null" >
+        CONTACTS = #{contacts,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        STATUS = #{status,jdbcType=DECIMAL},
+      </if>
+      <if test="isEnable != null" >
+        IS_ENABLE = #{isEnable,jdbcType=INTEGER},
+      </if>
+      <if test="externalManufacturer != null" >
+        EXTERNAL_MANUFACTURER = #{externalManufacturer,jdbcType=VARCHAR},
+      </if>
+      <if test="purchasingStaff != null" >
+        PURCHASING_STAFF = #{purchasingStaff,jdbcType=VARCHAR},
+      </if>
+      <if test="groupCode != null" >
+        GROUP_CODE = #{groupCode,jdbcType=VARCHAR},
+      </if>
+      <if test="delegateType != null" >
+        DELEGATE_TYPE = #{delegateType,jdbcType=VARCHAR},
+      </if>
+      <if test="businessType != null" >
+        BUSINESS_TYPE = #{businessType,jdbcType=VARCHAR},
+      </if>
+      <if test="industrialType != null" >
+        INDUSTRIAL_TYPE = #{industrialType,jdbcType=VARCHAR},
+      </if>
+      <if test="reconciliationAccountCode != null" >
+        RECONCILIATION_ACCOUNT_CODE = #{reconciliationAccountCode,jdbcType=VARCHAR},
+      </if>
+      <if test="reconciliationAccountName != null" >
+        RECONCILIATION_ACCOUNT_NAME = #{reconciliationAccountName,jdbcType=VARCHAR},
+      </if>
+      <if test="payConditionsCode != null" >
+        PAY_CONDITIONS_CODE = #{payConditionsCode,jdbcType=VARCHAR},
+      </if>
+      <if test="payConditionsDesc != null" >
+        PAY_CONDITIONS_DESC = #{payConditionsDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="orderCurren != null" >
+        ORDER_CURREN = #{orderCurren,jdbcType=VARCHAR},
+      </if>
+      <if test="internationalTradeCondition != null" >
+        INTERNATIONAL_TRADE_CONDITION = #{internationalTradeCondition,jdbcType=VARCHAR},
+      </if>
+      <if test="salesman != null" >
+        SALESMAN = #{salesman,jdbcType=VARCHAR},
+      </if>
+      <if test="salesmanPhone != null" >
+        SALESMAN_PHONE = #{salesmanPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="invoiceVerify != null" >
+        INVOICE_VERIFY = #{invoiceVerify,jdbcType=VARCHAR},
+      </if>
+      <if test="automaticPurchaseOrder != null" >
+        AUTOMATIC_PURCHASE_ORDER = #{automaticPurchaseOrder,jdbcType=VARCHAR},
+      </if>
+      <if test="purchasingGroup != null" >
+        PURCHASING_GROUP = #{purchasingGroup,jdbcType=VARCHAR},
+      </if>
+      <if test="plannedDeliveryTime != null" >
+        PLANNED_DELIVERY_TIME = #{plannedDeliveryTime,jdbcType=VARCHAR},
+      </if>
+      <if test="supplyProperties != null" >
+        SUPPLY_PROPERTIES = #{supplyProperties,jdbcType=VARCHAR},
+      </if>
+      <if test="industryCode != null" >
+        INDUSTRY_CODE = #{industryCode,jdbcType=VARCHAR},
+      </if>
+      <if test="industryDesc != null" >
+        INDUSTRY_DESC = #{industryDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="bankName != null" >
+        BANK_NAME = #{bankName,jdbcType=VARCHAR},
+      </if>
+      <if test="bankAddress != null" >
+        BANK_ADDRESS = #{bankAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="bankAccount != null" >
+        BANK_ACCOUNT = #{bankAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="bankType != null" >
+        BANK_TYPE = #{bankType,jdbcType=VARCHAR},
+      </if>
+      <if test="level != null" >
+        LEVEL = #{level,jdbcType=INTEGER},
+      </if>
+      <if test="saleChannel != null" >
+        SALE_CHANNEL = #{saleChannel,jdbcType=VARCHAR},
+      </if>
+      <if test="district != null" >
+        DISTRICT = #{district,jdbcType=VARCHAR},
+      </if>
+      <if test="area != null" >
+        AREA = #{area,jdbcType=VARCHAR},
+      </if>
+      <if test="isSendAuth != null" >
+        IS_SEND_AUTH = #{isSendAuth,jdbcType=VARCHAR},
+      </if>
+      <if test="creditLimit != null" >
+        CREDIT_LIMIT = #{creditLimit,jdbcType=DECIMAL},
+      </if>
+      <if test="creditLimitEndTime != null" >
+        CREDIT_LIMIT_END_TIME = #{creditLimitEndTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="clearingForm != null" >
+        CLEARING_FORM = #{clearingForm,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.els.base.company.entity.Company" >
+    update t_base_company
+    set PARENT_ID = #{parentId,jdbcType=VARCHAR},
+      PROJECT_ID = #{projectId,jdbcType=VARCHAR},
+      INDUSTRY = #{industry,jdbcType=VARCHAR},
+      SUB_INDUSTRY = #{subIndustry,jdbcType=VARCHAR},
+      COMPANY_CODE = #{companyCode,jdbcType=VARCHAR},
+      COMPANY_SAP_CODE = #{companySapCode,jdbcType=VARCHAR},
+      COMPANY_NAME = #{companyName,jdbcType=VARCHAR},
+      COMPANY_FULL_NAME = #{companyFullName,jdbcType=VARCHAR},
+      COMPANY_TYPE = #{companyType,jdbcType=VARCHAR},
+      BUSINESS_SCOP = #{businessScop,jdbcType=VARCHAR},
+      TAX_CERT = #{taxCert,jdbcType=VARCHAR},
+      ORGANZATION_CERT = #{organzationCert,jdbcType=VARCHAR},
+      BUSINESS_LICENCE = #{businessLicence,jdbcType=VARCHAR},
+      COUNTRY = #{country,jdbcType=VARCHAR},
+      PROVINCE = #{province,jdbcType=VARCHAR},
+      CITY = #{city,jdbcType=VARCHAR},
+      ADDRESS = #{address,jdbcType=VARCHAR},
+      MOBILEPHONE = #{mobilephone,jdbcType=VARCHAR},
+      TELEPHONE = #{telephone,jdbcType=VARCHAR},
+      FAX = #{fax,jdbcType=VARCHAR},
+      EMAIL = #{email,jdbcType=VARCHAR},
+      WEBSITE = #{website,jdbcType=VARCHAR},
+      REMARK = #{remark,jdbcType=VARCHAR},
+      CONTACTS = #{contacts,jdbcType=VARCHAR},
+      STATUS = #{status,jdbcType=DECIMAL},
+      IS_ENABLE = #{isEnable,jdbcType=INTEGER},
+      EXTERNAL_MANUFACTURER = #{externalManufacturer,jdbcType=VARCHAR},
+      PURCHASING_STAFF = #{purchasingStaff,jdbcType=VARCHAR},
+      GROUP_CODE = #{groupCode,jdbcType=VARCHAR},
+      DELEGATE_TYPE = #{delegateType,jdbcType=VARCHAR},
+      BUSINESS_TYPE = #{businessType,jdbcType=VARCHAR},
+      INDUSTRIAL_TYPE = #{industrialType,jdbcType=VARCHAR},
+      RECONCILIATION_ACCOUNT_CODE = #{reconciliationAccountCode,jdbcType=VARCHAR},
+      RECONCILIATION_ACCOUNT_NAME = #{reconciliationAccountName,jdbcType=VARCHAR},
+      PAY_CONDITIONS_CODE = #{payConditionsCode,jdbcType=VARCHAR},
+      PAY_CONDITIONS_DESC = #{payConditionsDesc,jdbcType=VARCHAR},
+      ORDER_CURREN = #{orderCurren,jdbcType=VARCHAR},
+      INTERNATIONAL_TRADE_CONDITION = #{internationalTradeCondition,jdbcType=VARCHAR},
+      SALESMAN = #{salesman,jdbcType=VARCHAR},
+      SALESMAN_PHONE = #{salesmanPhone,jdbcType=VARCHAR},
+      INVOICE_VERIFY = #{invoiceVerify,jdbcType=VARCHAR},
+      AUTOMATIC_PURCHASE_ORDER = #{automaticPurchaseOrder,jdbcType=VARCHAR},
+      PURCHASING_GROUP = #{purchasingGroup,jdbcType=VARCHAR},
+      PLANNED_DELIVERY_TIME = #{plannedDeliveryTime,jdbcType=VARCHAR},
+      SUPPLY_PROPERTIES = #{supplyProperties,jdbcType=VARCHAR},
+      INDUSTRY_CODE = #{industryCode,jdbcType=VARCHAR},
+      INDUSTRY_DESC = #{industryDesc,jdbcType=VARCHAR},
+      CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      BANK_NAME = #{bankName,jdbcType=VARCHAR},
+      BANK_ADDRESS = #{bankAddress,jdbcType=VARCHAR},
+      BANK_ACCOUNT = #{bankAccount,jdbcType=VARCHAR},
+      BANK_TYPE = #{bankType,jdbcType=VARCHAR},
+      LEVEL = #{level,jdbcType=INTEGER},
+      SALE_CHANNEL = #{saleChannel,jdbcType=VARCHAR},
+      DISTRICT = #{district,jdbcType=VARCHAR},
+      AREA = #{area,jdbcType=VARCHAR},
+      IS_SEND_AUTH = #{isSendAuth,jdbcType=VARCHAR},
+      CREDIT_LIMIT = #{creditLimit,jdbcType=DECIMAL},
+      CREDIT_LIMIT_END_TIME = #{creditLimitEndTime,jdbcType=TIMESTAMP},
+      CLEARING_FORM = #{clearingForm,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <select id="selectByExampleByPage" resultMap="BaseResultMap" parameterType="com.els.base.company.entity.CompanyExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from t_base_company
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  
+  <!--手写的sql start-->
+
+  <insert id="insertBatch" parameterType="com.els.base.company.entity.Company" >
+    insert into T_BASE_COMPANY (ID, PARENT_ID, PROJECT_ID,
+    INDUSTRY, SUB_INDUSTRY, COMPANY_CODE,
+    COMPANY_SAP_CODE, COMPANY_NAME,
+    COMPANY_FULL_NAME, COMPANY_TYPE,
+    BUSINESS_SCOP, TAX_CERT, ORGANZATION_CERT,
+    BUSINESS_LICENCE, COUNTRY, PROVINCE,
+    CITY, ADDRESS, MOBILEPHONE,
+    TELEPHONE, FAX, EMAIL,
+    WEBSITE, REMARK, CONTACTS,
+    STATUS, IS_ENABLE, EXTERNAL_MANUFACTURER,
+    PURCHASING_STAFF, GROUP_CODE, DELEGATE_TYPE,
+    BUSINESS_TYPE, INDUSTRIAL_TYPE,
+    RECONCILIATION_ACCOUNT_CODE, RECONCILIATION_ACCOUNT_NAME,
+    PAY_CONDITIONS_CODE, PAY_CONDITIONS_DESC,
+    ORDER_CURREN, INTERNATIONAL_TRADE_CONDITION,
+    SALESMAN, SALESMAN_PHONE, INVOICE_VERIFY,
+    AUTOMATIC_PURCHASE_ORDER, PURCHASING_GROUP,
+    PLANNED_DELIVERY_TIME, SUPPLY_PROPERTIES,
+    INDUSTRY_CODE, INDUSTRY_DESC, CREATE_TIME
+    ) values
+    <foreach collection="list" item="item" index="index" separator="," >
+      (#{item.id,jdbcType=VARCHAR}, #{item.parentId,jdbcType=VARCHAR}, #{item.projectId,jdbcType=VARCHAR},
+      #{item.industry,jdbcType=VARCHAR}, #{item.subIndustry,jdbcType=VARCHAR}, #{item.companyCode,jdbcType=VARCHAR},
+      #{item.companySapCode,jdbcType=VARCHAR}, #{item.companyName,jdbcType=VARCHAR},
+      #{item.companyFullName,jdbcType=VARCHAR}, #{item.companyType,jdbcType=VARCHAR},
+      #{item.businessScop,jdbcType=VARCHAR}, #{item.taxCert,jdbcType=VARCHAR}, #{item.organzationCert,jdbcType=VARCHAR},
+      #{item.businessLicence,jdbcType=VARCHAR}, #{item.country,jdbcType=VARCHAR}, #{item.province,jdbcType=VARCHAR},
+      #{item.city,jdbcType=VARCHAR}, #{item.address,jdbcType=VARCHAR}, #{item.mobilephone,jdbcType=VARCHAR},
+      #{item.telephone,jdbcType=VARCHAR}, #{item.fax,jdbcType=VARCHAR}, #{item.email,jdbcType=VARCHAR},
+      #{item.website,jdbcType=VARCHAR}, #{item.remark,jdbcType=VARCHAR}, #{item.contacts,jdbcType=VARCHAR},
+      #{item.status,jdbcType=INTEGER}, #{item.isEnable,jdbcType=INTEGER}, #{item.externalManufacturer,jdbcType=VARCHAR},
+      #{item.purchasingStaff,jdbcType=VARCHAR}, #{item.groupCode,jdbcType=VARCHAR}, #{item.delegateType,jdbcType=VARCHAR},
+      #{item.businessType,jdbcType=VARCHAR}, #{item.industrialType,jdbcType=VARCHAR},
+      #{item.reconciliationAccountCode,jdbcType=VARCHAR}, #{item.reconciliationAccountName,jdbcType=VARCHAR},
+      #{item.payConditionsCode,jdbcType=VARCHAR}, #{item.payConditionsDesc,jdbcType=VARCHAR},
+      #{item.orderCurren,jdbcType=VARCHAR}, #{item.internationalTradeCondition,jdbcType=VARCHAR},
+      #{item.salesman,jdbcType=VARCHAR}, #{item.salesmanPhone,jdbcType=VARCHAR}, #{item.invoiceVerify,jdbcType=VARCHAR},
+      #{item.automaticPurchaseOrder,jdbcType=VARCHAR}, #{item.purchasingGroup,jdbcType=VARCHAR},
+      #{item.plannedDeliveryTime,jdbcType=VARCHAR}, #{item.supplyProperties,jdbcType=VARCHAR},
+      #{item.industryCode,jdbcType=VARCHAR}, #{item.industryDesc,jdbcType=VARCHAR}, #{item.createTime,jdbcType=TIMESTAMP}
+      )
+    </foreach>
+  </insert>
+
+  <select id="selectSupCompany" resultMap="BaseResultMap" parameterType="map" >
+    select C.* from T_BASE_COMPANY_PARTNER CP ,(
+    select
+    <include refid="Base_Column_List" />
+    from T_BASE_COMPANY
+    <if test="example != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+    ) C
+    WHERE CP.PARTNER_COMPANY_ID = C.ID AND CP.COMPANY_ID = #{purCompanyId,jdbcType=VARCHAR}
+    <if test="example.orderByClause != null" >
+      order by ${example.orderByClause}
+    </if>
+  </select>
+
+  <select id="selectSupCompanyByPage" resultMap="BaseResultMap" parameterType="map" >
+    select C.* from T_BASE_COMPANY_PARTNER CP ,(
+    select
+    <include refid="Base_Column_List" />
+    from T_BASE_COMPANY
+    <if test="example != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+    ) C
+    WHERE CP.PARTNER_COMPANY_ID = C.ID AND CP.COMPANY_ID = #{purCompanyId,jdbcType=VARCHAR}
+    <if test="example.orderByClause != null" >
+      order by ${example.orderByClause}
+    </if>
+  </select>
+</mapper>
